@@ -1,37 +1,45 @@
 private class ThomasElectron extends Particle
 {
-    private PVector position;
-    private PVector velocity;
     private AtomModel container;
 
-    public ThomasElectron(AtomModel container)
+    public ThomasElectron(AtomModel container, PVector position, PVector velocity)
     {
+        super(position, velocity, 3);
         this.container = container;
-        this.position = position;
-        velocity = new PVector(random(-.5f, .5f), random(-.5f, .5f));
     }
 
+    @Override
     public void drawParticle()
     {
         noStroke();
         fill(204, 254, 255);
-        ellipse(position.x, position.y, 6, 6);
-        stroke(1);
+        ellipse(getPosition().x, getPosition().y, getRadius()*2, getRadius()*2);
+        stroke(0);
+        line(getPosition().x - getRadius() + 1, getPosition().y, getPosition().x + getRadius() - 1, getPosition().y);
+ 
+        getPosition().add(getVelocity());
 
-        position.add(velocity);
-
-        if(position.mag() + 3 >= getRadius())
-        {
+        if(getPosition().mag() + getRadius() >= container.getRadius())
+        {//asdf
+            //bump it back just a bit
+            getPosition().sub(new PVector(getPosition().x * .02, getPosition().y * .02));
+            
+            float tempX = getVelocity().x;
+            getVelocity().x = -getVelocity().y;
+            getVelocity().y = tempX;
+            
+            /*experimental fancy bounces
             //bump it in a bit
-            position.sub(new PVector(position.x * .02f, position.y * .02f));
+            getPosition().sub(new PVector(getPosition().x * .02f, getPosition().y * .02f));
 
             //choose a bounce angle
             float ang = (float)(Math.toRadians(random(90, 270)));
             //bounce
-            float oldX = velocity.x;
-            float oldY = velocity.y;
-            velocity.x = (float)(Math.cos(ang)) * oldX - (float)(Math.sin(ang)) * oldY;
-            velocity.y = (float)(Math.sin(ang)) * oldX + (float)(Math.cos(ang)) * oldY;
+            float oldX = getVelocity().x;
+            float oldY = getVelocity().y;
+            getVelocity().x = (float)(Math.cos(ang)) * oldX - (float)(Math.sin(ang)) * oldY;
+            getVelocity().y = (float)(Math.sin(ang)) * oldX + (float)(Math.cos(ang)) * oldY;
+            */
         }
     }
 }

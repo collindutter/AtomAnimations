@@ -38,10 +38,11 @@ public void draw()
         cameraX++;
     translate(-cameraX, -cameraY);
 
-    //draw the thomson model
-    thomsonModel.draw(100, height / 2);
     //draw the dalton model
-    daltonModel.draw(width / 2 + 100, height / 2);
+    daltonModel.draw(100, height / 2);
+    //draw the thomson model
+    thomsonModel.draw(300, height / 2);
+    
 
     popMatrix();
 }
