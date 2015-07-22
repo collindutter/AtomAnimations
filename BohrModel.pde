@@ -1,4 +1,4 @@
-public class RutherfordModel extends AtomModel
+public class BohrModel extends AtomModel
 {
     private ArrayList<Particle> nucleusParticles;
     private ArrayList<Particle> orbitalParticles;
@@ -7,28 +7,30 @@ public class RutherfordModel extends AtomModel
     private final int NUM_NEUTRONS = 3;
     private final int NUM_ELECTRONS = 3;
     
-    public RutherfordModel()
+    public BohrModel()
     {
-         super("Rutherford Model", 25, new PVector(500, height / 2));  
-         nucleusParticles = new ArrayList<Particle>();
-         orbitalParticles = new ArrayList<Particle>();
-         generateNucleus();
-         for(int i = 0; i < NUM_ELECTRONS; i++)
-             orbitalParticles.add(new RutherfordElectron(-PI/2 + 2*PI/NUM_ELECTRONS*i));
+        super("Bohr Model", 25, new PVector(700, height / 2));
+        nucleusParticles = new ArrayList<Particle>();
+        orbitalParticles = new ArrayList<Particle>();
+        generateNucleus();
+        for(int i = 1; i <= NUM_ELECTRONS; i++)
+            orbitalParticles.add(new BohrElectron(i*10));
     }
     
     public void drawModel()
     {
         pushMatrix();
         translate(getPosition().x, getPosition().y);
+        
         for(Particle p : nucleusParticles)
            p.drawParticle();
         for(Particle p : orbitalParticles)
-            p.drawParticle();      
+            p.drawParticle();
+            
         fill(0);
         textSize(15);
         textAlign(CENTER);
-        text(getName(), 0, 30 + 15);
+        text(getName(), 0, NUM_ELECTRONS*10 + 15);
         popMatrix();
     }
     

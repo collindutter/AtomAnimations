@@ -12,10 +12,10 @@ public class DaltonModel extends AtomModel
      * @param centerY y coordinate to center the atom upon
      */
     @Override
-    public void drawModel(float centerX, float centerY)
+    public void drawModel()
     {
         pushMatrix();
-        translate(centerX, centerY);
+        translate(getPosition().x, getPosition().y);
         fill(205, 103, 204);
         ellipse(0, 0, getRadius() * 2, getRadius() * 2);
         fill(0);

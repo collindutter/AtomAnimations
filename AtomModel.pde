@@ -11,9 +11,10 @@ public abstract class AtomModel
         this.position = position;
     }
 
-    public abstract void drawModel(float centerX, float centerY);
+    public abstract void drawModel();
 
     public String getName(){return name;}
+    public PVector getPosition(){return position;}
     public int getRadius(){return radius;}
     
 }

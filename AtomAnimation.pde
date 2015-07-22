@@ -1,8 +1,5 @@
 float cameraX, cameraY;
 float scaleFactor;
-DaltonModel daltonModel;
-ThomsonModel thomsonModel;
-RutherfordModel rutherfordModel;
 boolean[] keysPressed;
 AtomModel[] models;
 int modelsIndex;
@@ -12,12 +9,14 @@ public void setup()
 {
     size(400, 400);
     scaleFactor = 1;
-    models = new AtomModel[3];
+    models = new AtomModel[5];
     models[0] = new DaltonModel();
     models[1] = new ThomsonModel();
     models[2] = new RutherfordModel();
+    models[3] = new BohrModel();
+    models[4] = new QuantumMechanicsModel();
     keysPressed = new boolean[256];
-    modelsIndex = 2;
+    modelsIndex = 0;
     targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
     cameraX = targetPos.x;
     cameraY = targetPos.y;
@@ -39,9 +38,10 @@ public void draw()
     translate(-cameraX, -cameraY);
 
     for(int i = 0; i < models.length; i++)
-        models[i].drawModel(models[i].position.x, height/2);
-    
+        models[i].drawModel();
+        
     popMatrix();
+    text((int)frameRate, 12, 15);
 }
 
 public void mouseWheel(MouseEvent e)
@@ -52,7 +52,7 @@ public void mouseWheel(MouseEvent e)
 public void keyPressed(KeyEvent e)
 {
     modelsIndex = (modelsIndex < models.length - 1  ? modelsIndex+1 : 0);
-    targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
+    targetPos = new PVector(models[modelsIndex].getPosition().x, models[modelsIndex].getPosition().y);
 }
 
 public void keyReleased(KeyEvent e)
