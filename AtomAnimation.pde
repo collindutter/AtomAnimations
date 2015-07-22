@@ -2,17 +2,25 @@ float cameraX, cameraY;
 float scaleFactor;
 DaltonModel daltonModel;
 ThomsonModel thomsonModel;
+RutherfordModel rutherfordModel;
 boolean[] keysPressed;
+AtomModel[] models;
+int modelsIndex;
+PVector targetPos;
 
 public void setup()
 {
     size(400, 400);
-    cameraX = 0;
-    cameraY = 0;
     scaleFactor = 1;
-    daltonModel = new DaltonModel();
-    thomsonModel = new ThomsonModel();
+    models = new AtomModel[3];
+    models[0] = new DaltonModel();
+    models[1] = new ThomsonModel();
+    models[2] = new RutherfordModel();
     keysPressed = new boolean[256];
+    int modelsIndex = 0;
+    targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
+    cameraX = targetPos.x;
+    cameraY = targetPos.y;
 }
 
 public void draw()
@@ -25,25 +33,14 @@ public void draw()
     //scale based on zoom
     translate(width / 2, height / 2);
     scale(scaleFactor);
-    translate(-width / 2, -height / 2);
-
-    //debugging camera controls
-    if(keysPressed[87])
-        cameraY--;
-    if(keysPressed[65])
-        cameraX--;
-    if(keysPressed[83])
-        cameraY++;
-    if(keysPressed[68])
-        cameraX++;
+    
+    cameraX += (targetPos.x - cameraX) / 15;
+    cameraY += (targetPos.y - cameraY) / 15;
     translate(-cameraX, -cameraY);
 
-    //draw the dalton model
-    daltonModel.draw(100, height / 2);
-    //draw the thomson model
-    thomsonModel.draw(300, height / 2);
+    for(int i = 0; i < models.length; i++)
+        models[i].drawModel(models[i].position.x, height/2);
     
-
     popMatrix();
 }
 
@@ -54,7 +51,8 @@ public void mouseWheel(MouseEvent e)
 
 public void keyPressed(KeyEvent e)
 {
-    keysPressed[e.getKeyCode()] = true;
+    modelsIndex = (modelsIndex < models.length - 1  ? modelsIndex+1 : 0);
+    targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
 }
 
 public void keyReleased(KeyEvent e)

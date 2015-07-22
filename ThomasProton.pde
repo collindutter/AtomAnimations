@@ -10,7 +10,6 @@ public class ThomasProton extends Particle
     @Override
     public void drawParticle()
     {
-        noStroke();
         stroke(249, 192, 160);
         //vertical line
         line(getPosition().x, getPosition().y + getRadius(), getPosition().x, getPosition().y - getRadius());

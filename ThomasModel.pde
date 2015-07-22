@@ -4,7 +4,7 @@ private class ThomsonModel extends AtomModel
 
     public ThomsonModel()
     {
-        super("Thomson Model", 25);
+        super("Thomson Model", 25, new PVector(300, height / 2));
         particles = new ArrayList<Particle>();
         for(int i = 0; i < 10; i++)
         {
@@ -16,7 +16,6 @@ private class ThomsonModel extends AtomModel
             PVector protVel = new PVector(random(-.5f, .5f), random(-.5f, .5f));   
             particles.add(new ThomasProton(this, protPos, protVel));
         }
-        
     }
 
     /**
@@ -25,7 +24,8 @@ private class ThomsonModel extends AtomModel
      * @param centerX x coordinate to center the atom upon
      * @param centerY y coordinate to center the atom upon
      */
-    public void draw(float centerX, float centerY)
+    @Override
+    public void drawModel(float centerX, float centerY)
     {
         pushMatrix();
         translate(centerX, centerY);

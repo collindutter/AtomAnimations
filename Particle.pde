@@ -14,6 +14,7 @@ public abstract class Particle
     public abstract void drawParticle();
     
     public PVector getPosition(){return position;}
+    public void setPosition(PVector position){this.position = position;}
     public PVector getVelocity(){return velocity;}
     public int getRadius(){return radius;}
 }

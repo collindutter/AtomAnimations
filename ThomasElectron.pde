@@ -20,7 +20,7 @@ private class ThomasElectron extends Particle
         getPosition().add(getVelocity());
 
         if(getPosition().mag() + getRadius() >= container.getRadius())
-        {//asdf
+        {
             //bump it back just a bit
             getPosition().sub(new PVector(getPosition().x * .02, getPosition().y * .02));
             
