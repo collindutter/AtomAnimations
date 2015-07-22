@@ -17,7 +17,7 @@ public void setup()
     models[1] = new ThomsonModel();
     models[2] = new RutherfordModel();
     keysPressed = new boolean[256];
-    int modelsIndex = 0;
+    modelsIndex = 2;
     targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
     cameraX = targetPos.x;
     cameraY = targetPos.y;

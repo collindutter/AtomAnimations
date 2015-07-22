@@ -34,21 +34,20 @@ public class RutherfordModel extends AtomModel
     
     private void generateNucleus()
     {
-         //generate the neutrons
-         for(int i = 0; i < NUM_NEUTRONS; i++)
-         {
-            //PVector neutronPos = new PVector(random(0, 1) >= .5f ? random(2, 5) : random(-2, -5), random(0, 1) >= .5f ? random(3, 6) : random(-2, -5));
-            PVector neutronPos = new PVector(random(-3, 4), random(-3, 4));
+        float angle = 0;
+        for(int i = 0; i < NUM_NEUTRONS + NUM_PROTONS; i++)
+        {
+            PVector neutronPos = new PVector(3*cos(angle), 3*sin(angle));
             PVector neutronVel = new PVector(0, 0);
             RutherfordNeutron neutron = new RutherfordNeutron(neutronPos, neutronVel, 3);
             nucleusParticles.add(neutron);
+            angle += 2*PI/NUM_NEUTRONS/2;
             
-            //PVector protonPos = new PVector(random(0, 1) >= .5f ? random(2, 5) : random(-2, -5), random(0, 1) >= .5f ? random(2, 5) : random(-2, -5));
-            PVector protonPos = new PVector(random(-3, 4), random(-3, 4));
+            PVector protonPos = new PVector(3*cos(angle), 3*sin(angle));
             PVector protonVel = new PVector(0, 0);
             RutherfordProton proton = new RutherfordProton(protonPos, protonVel, 3);
-            nucleusParticles.add(proton);   
-         }
+            nucleusParticles.add(proton);
+            angle += 2*PI/NUM_PROTONS/2;
+        }
     }
-    
 }

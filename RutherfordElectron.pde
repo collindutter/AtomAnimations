@@ -22,9 +22,8 @@ public class RutherfordElectron extends Particle
        setPosition(new PVector(x, y));
        
        pushMatrix();
-       noFill();
        rotate(orbitRotation);
-       
+       noFill();
        ellipse(0, 0, orbitRadius*2, orbitRadius*2/3f);
        popMatrix();
        
