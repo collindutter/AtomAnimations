@@ -3,10 +3,7 @@ public abstract class AtomModel
     private String name;
     private int radius;
     private PVector position;
-    
-    protected final int NUM_PROTONS = 1;
-    protected final int NUM_NEUTRONS = 0;
-    protected final int NUM_ELECTRONS = 1;
+   
 
     public AtomModel(String name, int radius, PVector position)
     {

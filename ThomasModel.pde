@@ -1,23 +1,19 @@
 private class ThomsonModel extends AtomModel
 {
     private ArrayList<Particle> particles;
+   
+    private final int NUM_ELECTRONS = 5;
     
     public ThomsonModel()
     {
         super("Thomson Model", 25, new PVector(300, height / 2));
         particles = new ArrayList<Particle>();
+        
         for(int i = 0; i < NUM_ELECTRONS; i++)
         {
             PVector elecPos = new PVector(random(-getRadius() + 6, getRadius() - 6), random(-getRadius() + 6, getRadius() - 6));
             PVector elecVel = new PVector(random(-.5f, .5f), random(-.5f, .5f));   
             particles.add(new ThomasElectron(this, elecPos, elecVel));
-        }
-        
-        for(int i = 0; i < NUM_PROTONS; i++)
-        {
-            PVector protPos = new PVector(random(-getRadius() + 6, getRadius() - 6), random(-getRadius() + 6, getRadius() - 6));
-            PVector protVel = new PVector(random(-.5f, .5f), random(-.5f, .5f));   
-            particles.add(new ThomasProton(this, protPos, protVel));
         }
     }
 

@@ -3,6 +3,10 @@ public class RutherfordModel extends AtomModel
     private ArrayList<Particle> nucleusParticles;
     private ArrayList<Particle> orbitalParticles;
     
+    private final int NUM_PROTONS = 3;
+    private final int NUM_NEUTRONS = 3;
+    private final int NUM_ELECTRONS = 3;
+    
     public RutherfordModel()
     {
          super("Rutherford Model", 25, new PVector(500, height / 2));  
