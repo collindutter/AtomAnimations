@@ -10,7 +10,6 @@ public class BohrElectron extends Particle
         orbitAngle = random(0, 2 * PI);
         this.orbitRadius = orbitRadius;
         angularVel = random(.05, .1);
-        
     }
     
     public void drawParticle()

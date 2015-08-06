@@ -1,6 +1,5 @@
 float cameraX, cameraY;
 float scaleFactor;
-boolean[] keysPressed;
 AtomModel[] models;
 int modelsIndex;
 PVector targetPos;
@@ -15,7 +14,6 @@ public void setup()
     models[2] = new RutherfordModel();
     models[3] = new BohrModel();
     models[4] = new QuantumMechanicsModel();
-    keysPressed = new boolean[256];
     modelsIndex = 0;
     targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
     cameraX = targetPos.x;
@@ -53,9 +51,4 @@ public void keyPressed(KeyEvent e)
 {
     modelsIndex = (modelsIndex < models.length - 1  ? modelsIndex+1 : 0);
     targetPos = new PVector(models[modelsIndex].getPosition().x, models[modelsIndex].getPosition().y);
-}
-
-public void keyReleased(KeyEvent e)
-{
-    keysPressed[e.getKeyCode()] = false;
 }

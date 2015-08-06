@@ -3,10 +3,6 @@ public class BohrModel extends AtomModel
     private ArrayList<Particle> nucleusParticles;
     private ArrayList<Particle> orbitalParticles;
     
-    private final int NUM_PROTONS = 3;
-    private final int NUM_NEUTRONS = 3;
-    private final int NUM_ELECTRONS = 3;
-    
     public BohrModel()
     {
         super("Bohr Model", 25, new PVector(700, height / 2));
