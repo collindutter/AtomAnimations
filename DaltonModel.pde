@@ -17,10 +17,11 @@ public class DaltonModel extends AtomModel
         pushMatrix();
         translate(getPosition().x, getPosition().y);
         fill(205, 103, 204);
-        ellipse(0, 0, getRadius() * 2, getRadius() * 2);
-        fill(0);
+        noStroke();
+        sphere(getRadius()*2);
         textSize(15);
         textAlign(CENTER);
+        fill(0);
         text(getName(), 0, getRadius() + 15);
         popMatrix();
     }    

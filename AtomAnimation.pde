@@ -3,10 +3,9 @@ float scaleFactor;
 AtomModel[] models;
 int modelsIndex;
 PVector targetPos;
-
 public void setup()
 {
-    size(400, 400);
+    size(400, 400, P3D);
     scaleFactor = 1;
     models = new AtomModel[5];
     models[0] = new DaltonModel();
@@ -24,6 +23,7 @@ public void draw()
 {
     //set background and basic stroke colors
     background(255);
+    lights();
     stroke(0);
 
     pushMatrix();
