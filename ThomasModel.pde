@@ -6,13 +6,13 @@ private class ThomsonModel extends AtomModel
     
     public ThomsonModel()
     {
-        super("Thomson Model", 25, new PVector(300, height / 2));
+        super("Thomson Model", 45, new PVector(300, height / 2));
         particles = new ArrayList<Particle>();
         
         for(int i = 0; i < NUM_ELECTRONS; i++)
         {
-            PVector elecPos = new PVector(random(-getRadius() + 6, getRadius() - 6), random(-getRadius() + 6, getRadius() - 6));
-            PVector elecVel = new PVector(random(-.5f, .5f), random(-.5f, .5f));   
+            PVector elecPos = new PVector(random(-getRadius() + 6, getRadius() - 6), random(-getRadius() + 6, getRadius() - 6), random(-getRadius() + 6, getRadius() - 6));
+            PVector elecVel = new PVector(random(-.5f, .5f), random(-.5f, .5f), random(-.5f, .5f));   
             particles.add(new ThomasElectron(this, elecPos, elecVel));
         }
     }
@@ -29,8 +29,10 @@ private class ThomsonModel extends AtomModel
         pushMatrix();
         
         translate(getPosition().x, getPosition().y);
-        fill(205, 103, 204);
-        sphere(getRadius()*2);
+        stroke(0);
+        ellipse(0,0, getRadius()*2, getRadius()*2);
+        //sphere(getRadius());
+        
         for(Particle p : particles)
             p.drawParticle();
 

@@ -4,7 +4,7 @@ private class ThomasElectron extends Particle
 
     public ThomasElectron(AtomModel container, PVector position, PVector velocity)
     {
-        super(position, velocity, 3);
+        super(position, velocity, 6);
         this.container = container;
     }
 
@@ -13,22 +13,22 @@ private class ThomasElectron extends Particle
     {
         noStroke();
         fill(204, 254, 255);
-        translate(getPosition().x, getPosition().y);
-        sphere(getRadius()*2);
+        translate(getPosition().x, getPosition().y, getPosition().z);
+        sphere(getRadius());
         stroke(0);
-        translate(-getPosition().x, -getPosition().y);
+        translate(-getPosition().x, -getPosition().y, -getPosition().z);
         
         getPosition().add(getVelocity());
 
         if(getPosition().mag() + getRadius() >= container.getRadius())
         {
             //bump it back just a bit
-            getPosition().sub(new PVector(getPosition().x * .02, getPosition().y * .02));
+            //getPosition().sub(new PVector(getPosition().x * .02, getPosition().y * .02, getPosition().z * .02));
             
-            //flippity flop them velocities
-            float tempX = getVelocity().x;
-            getVelocity().x = -getVelocity().y;
-            getVelocity().y = tempX;
+    //            //flippity flop them velocities
+    //            float tempX = getVelocity().x;
+    //            getVelocity().x = -getVelocity().y;
+    //            getVelocity().y = tempX;
         }
         
     }

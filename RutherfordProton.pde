@@ -10,12 +10,15 @@ public class RutherfordProton extends Particle
     {
         fill(#E34545);
         noStroke();
-        ellipse(getPosition().x, getPosition().y, getRadius()*2, getRadius()*2);
+        translate(getPosition().x, getPosition().y);
+        sphere(getRadius());
         stroke(249, 192, 160);
+        
         //vertical line
-        line(getPosition().x, getPosition().y + getRadius() - 1, getPosition().x, getPosition().y - getRadius() + 1);
+        line(0, getRadius() - 1, 0, - getRadius() + 1);
         //horizontal line
-        line(getPosition().x - getRadius() + 1, getPosition().y, getPosition().x + getRadius() - 1, getPosition().y);
+        line(- getRadius() + 1, 0, + getRadius() - 1, 0);
         stroke(0);
+        translate(-getPosition().x, -getPosition().y);
     }
 }

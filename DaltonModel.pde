@@ -2,7 +2,7 @@ public class DaltonModel extends AtomModel
 {
     public DaltonModel()
     {
-        super("Dalton Model", 25, new PVector(100, height / 2));
+        super("Dalton Model", 45, new PVector(100, height / 2));
     }
 
     /**
@@ -18,7 +18,7 @@ public class DaltonModel extends AtomModel
         translate(getPosition().x, getPosition().y);
         fill(205, 103, 204);
         noStroke();
-        sphere(getRadius()*2);
+        sphere(getRadius());
         textSize(15);
         textAlign(CENTER);
         fill(0);
