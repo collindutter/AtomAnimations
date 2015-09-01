@@ -42,13 +42,15 @@ public void draw()
     text((int)frameRate, 12, 15);
 }
 
-public void mouseWheel(MouseEvent e)
-{
-    scaleFactor = constrain(scaleFactor + e.getCount(), 1.0f, 7.0f);
-}
-
 public void keyPressed(KeyEvent e)
 {
-    modelsIndex = (modelsIndex < models.length - 1  ? modelsIndex+1 : 0);
+    if(e.getKeyCode() == LEFT && modelsIndex > 0)
+       modelsIndex--;
+    if(e.getKeyCode() == RIGHT && modelsIndex < models.length - 1)
+        modelsIndex++;
+    if(e.getKeyCode() == UP && scaleFactor < 7.0f)
+        scaleFactor+=.5;
+    if(e.getKeyCode() == DOWN && scaleFactor > 1.0f)
+        scaleFactor-=.5;
     targetPos = new PVector(models[modelsIndex].getPosition().x, models[modelsIndex].getPosition().y);
 }

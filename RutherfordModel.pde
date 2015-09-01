@@ -3,8 +3,8 @@ public class RutherfordModel extends AtomModel
     private ArrayList<Particle> nucleusParticles;
     private ArrayList<Particle> orbitalParticles;
     
-    private final int NUM_PROTONS = 3;
-    private final int NUM_NEUTRONS = 3;
+    private final int NUM_PROTONS = 1;
+    private final int NUM_NEUTRONS = 1;
     private final int NUM_ELECTRONS = 3;
     
     public RutherfordModel()
@@ -14,7 +14,7 @@ public class RutherfordModel extends AtomModel
          orbitalParticles = new ArrayList<Particle>();
          generateNucleus();
          for(int i = 0; i < NUM_ELECTRONS; i++)
-             orbitalParticles.add(new RutherfordElectron(-PI/2 + 2*PI/NUM_ELECTRONS*i));
+             orbitalParticles.add(new RutherfordElectron(-PI/2+ 2*PI/NUM_ELECTRONS*i));
     }
     
     public void drawModel()

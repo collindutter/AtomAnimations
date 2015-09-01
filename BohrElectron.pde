@@ -20,12 +20,16 @@ public class BohrElectron extends Particle
        setPosition(new PVector(x, y));
        
        noFill();
+       stroke(1);
+       println(orbitRadius);
        ellipse(0, 0, orbitRadius*2, orbitRadius*2);
        
        noStroke();
        fill(204, 254, 255);
-       ellipse(getPosition().x, getPosition().y, getRadius()*2, getRadius()*2);
-       stroke(0);
-       line(getPosition().x - getRadius() + 1, getPosition().y, getPosition().x + getRadius() - 1, getPosition().y); 
+       pushMatrix();
+       translate(getPosition().x, getPosition().y);
+       sphere(getRadius());
+       translate(-getPosition().x, -getPosition().y);
+       popMatrix();
     }
 }
