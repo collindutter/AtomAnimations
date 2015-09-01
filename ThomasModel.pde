@@ -12,7 +12,7 @@ private class ThomsonModel extends AtomModel
         for(int i = 0; i < NUM_ELECTRONS; i++)
         {
             PVector elecPos = new PVector(random(-getRadius() + 6, getRadius() - 6), random(-getRadius() + 6, getRadius() - 6), random(-getRadius() + 6, getRadius() - 6));
-            PVector elecVel = new PVector(random(-.5f, .5f), random(-.5f, .5f), random(-.5f, .5f));   
+            PVector elecVel = new PVector(random(-.5f, .5f), random(-.5f, .5f), random(-.5f, .5f));  
             particles.add(new ThomasElectron(this, elecPos, elecVel));
         }
     }
@@ -21,7 +21,7 @@ private class ThomsonModel extends AtomModel
      * draws the Thomson model of the atom
      *
      * @param centerX x coordinate to center the atom upon
-     * @param centerY y coordinate to center the atom upon
+     * @param centerY y  to center the atom upon
      */
     @Override
     public void drawModel()
@@ -29,9 +29,8 @@ private class ThomsonModel extends AtomModel
         pushMatrix();
         
         translate(getPosition().x, getPosition().y);
-        stroke(0);
-        ellipse(0,0, getRadius()*2, getRadius()*2);
-        //sphere(getRadius());
+        fill(100, 100, 10);
+        sphere(getRadius());
         
         for(Particle p : particles)
             p.drawParticle();

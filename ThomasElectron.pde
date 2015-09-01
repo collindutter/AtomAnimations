@@ -23,12 +23,8 @@ private class ThomasElectron extends Particle
         if(getPosition().mag() + getRadius() >= container.getRadius())
         {
             //bump it back just a bit
-            //getPosition().sub(new PVector(getPosition().x * .02, getPosition().y * .02, getPosition().z * .02));
-            
-    //            //flippity flop them velocities
-    //            float tempX = getVelocity().x;
-    //            getVelocity().x = -getVelocity().y;
-    //            getVelocity().y = tempX;
+            getPosition().sub(new PVector(getPosition().x * .02, getPosition().y * .02, getPosition().z * .02));
+            setVelocity(new PVector(-getVelocity().x, -getVelocity().y, -getVelocity().z));
         }
         
     }

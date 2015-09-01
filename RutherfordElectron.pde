@@ -29,7 +29,9 @@ public class RutherfordElectron extends Particle
        
        noStroke();
        fill(204, 254, 255);
-       ellipse(getPosition().x, getPosition().y, getRadius()*2, getRadius()*2);
+       translate(getPosition().x, getPosition().y);
+       sphere(getRadius());
+       translate(-getPosition().x, -getPosition().y);
        stroke(0);
        line(getPosition().x - getRadius() + 1, getPosition().y, getPosition().x + getRadius() - 1, getPosition().y);
        

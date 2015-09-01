@@ -13,7 +13,7 @@ public void setup()
     models[2] = new RutherfordModel();
     models[3] = new BohrModel();
     models[4] = new QuantumMechanicsModel();
-    modelsIndex = 0;
+    modelsIndex = 1;
     targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
     cameraX = targetPos.x;
     cameraY = targetPos.y;
