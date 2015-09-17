@@ -12,22 +12,20 @@ public class RutherfordElectron extends Particle
         orbitRadius = 30;
         angularVel = random(.05, .1);
         this.orbitRotation = orbitRotation;
+        println(degrees(orbitRotation));
     }
     
     public void drawParticle()
     {
        orbitAngle += angularVel;
+       float x = orbitRadius*3*cos(orbitAngle);
+       float y = orbitRadius*sin(orbitAngle);
        
-       
-       //pushMatrix();
-       //rotate(orbitRotation);
-       rotateY(orbitRotation);
-       float x = orbitRadius*cos(orbitAngle)*cos(orbitRotation) - orbitRadius/3f*sin(orbitAngle)*sin(orbitRotation);
-       float y = orbitRadius*cos(orbitAngle)*sin(orbitRotation) + orbitRadius/3f*sin(orbitAngle)*cos(orbitRotation);
        setPosition(new PVector(x, y));
+       rotateY(PI/2);
+       rotateX(orbitRotation);
        noFill();
-       ellipse(0, 0, orbitRadius*2, orbitRadius*2/3f);
-       //popMatrix();
+       ellipse(0, 0, orbitRadius*2*3, orbitRadius*2);
        
        noStroke();
        fill(204, 254, 255);
@@ -35,8 +33,10 @@ public class RutherfordElectron extends Particle
        sphere(getRadius());
        stroke(0);
        translate(-getPosition().x, -getPosition().y);
-      
-       rotateY(-orbitRotation);
+       rotateX(-orbitRotation);
+       rotateY(-PI/2);
+       
+       //rotateY(-orbitRotation);
        
        
     }

@@ -14,7 +14,8 @@ public class RutherfordModel extends AtomModel
          orbitalParticles = new ArrayList<Particle>();
          generateNucleus();
          for(int i = 0; i < NUM_ELECTRONS; i++)
-             orbitalParticles.add(new RutherfordElectron(-PI/2+ 2*PI/NUM_ELECTRONS*i));
+            orbitalParticles.add(new RutherfordElectron(-PI/4+ 2*PI/NUM_ELECTRONS*i));
+         
     }
     
     public void drawModel()

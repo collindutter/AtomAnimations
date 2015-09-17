@@ -21,7 +21,6 @@ public class BohrElectron extends Particle
        
        noFill();
        stroke(1);
-       println(orbitRadius);
        ellipse(0, 0, orbitRadius*2, orbitRadius*2);
        
        noStroke();
