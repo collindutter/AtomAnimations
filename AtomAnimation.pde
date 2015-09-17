@@ -3,6 +3,8 @@ float scaleFactor;
 AtomModel[] models;
 int modelsIndex;
 PVector targetPos;
+float cameraRot;
+
 public void setup()
 {
     size(400, 400, P3D);
@@ -17,6 +19,7 @@ public void setup()
     targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
     cameraX = targetPos.x;
     cameraY = targetPos.y;
+    cameraRot = 0;
 }
 
 public void draw()
@@ -28,7 +31,9 @@ public void draw()
 
     pushMatrix();
     //scale based on zoom
+   
     translate(width / 2, height / 2);
+    rotateY(cameraRot);
     scale(scaleFactor);
     
     cameraX += (targetPos.x - cameraX) / 15;
@@ -52,5 +57,10 @@ public void keyPressed(KeyEvent e)
         scaleFactor+=.5;
     if(e.getKeyCode() == DOWN && scaleFactor > 1.0f)
         scaleFactor-=.5;
+    if(e.getKeyCode() == 'A')
+        cameraRot += PI/6;
+    if(e.getKeyCode() == 'D')
+        cameraRot -= PI/6;
+        
     targetPos = new PVector(models[modelsIndex].getPosition().x, models[modelsIndex].getPosition().y);
 }
