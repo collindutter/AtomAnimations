@@ -35,26 +35,7 @@ public class RutherfordModel extends AtomModel
         popMatrix();
     }
     
-    private void generateBadNucleus()
-    {
-        float angle = 0;
-        for(int i = 0; i < NUM_NEUTRONS + NUM_PROTONS; i++)
-        {
-            PVector neutronPos = new PVector(3*cos(angle), 3*sin(angle));
-            PVector neutronVel = new PVector(0, 0);
-            RutherfordNeutron neutron = new RutherfordNeutron(neutronPos, neutronVel, 3);
-            nucleusParticles.add(neutron);
-            angle += 2*PI/NUM_NEUTRONS/2;
-            
-            PVector protonPos = new PVector(3*cos(angle), 3*sin(angle));
-            PVector protonVel = new PVector(0, 0);
-            RutherfordProton proton = new RutherfordProton(protonPos, protonVel, 3);
-            nucleusParticles.add(proton);
-            angle += 2*PI/NUM_PROTONS/2;
-        }
-    }
-    
-     private void generateNucleus()
+    private void generateNucleus()
     {    
         int radius = 3;
         for(int i = 0; i < NUM_NEUTRONS; i++)

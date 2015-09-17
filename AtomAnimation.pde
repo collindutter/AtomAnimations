@@ -3,7 +3,7 @@ float scaleFactor;
 AtomModel[] models;
 int modelsIndex;
 PVector targetPos;
-float cameraRot;
+float cameraRotY, cameraRotX;
 
 public void setup()
 {
@@ -15,11 +15,12 @@ public void setup()
     models[2] = new RutherfordModel();
     models[3] = new BohrModel();
     models[4] = new QuantumMechanicsModel();
-    modelsIndex = 2;
+    modelsIndex = 3;
     targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
     cameraX = targetPos.x;
     cameraY = targetPos.y;
-    cameraRot = 0;
+    cameraRotY = 0;
+    cameraRotX = 0;
 }
 
 public void draw()
@@ -33,7 +34,8 @@ public void draw()
     //scale based on zoom
    
     translate(width / 2, height / 2);
-    rotateY(cameraRot);
+    rotateY(cameraRotY);
+    rotateX(cameraRotX);
     scale(scaleFactor);
     
     cameraX += (targetPos.x - cameraX) / 15;
@@ -58,9 +60,13 @@ public void keyPressed(KeyEvent e)
     if(e.getKeyCode() == DOWN && scaleFactor > 1.0f)
         scaleFactor-=.5;
     if(e.getKeyCode() == 'A')
-        cameraRot += PI/6;
+        cameraRotY += PI/6;
     if(e.getKeyCode() == 'D')
-        cameraRot -= PI/6;
+        cameraRotY -= PI/6;
+    if(e.getKeyCode() == 'W')
+        cameraRotX -= PI/6;
+    if(e.getKeyCode() == 'S')
+        cameraRotX += PI/6;
     if(e.getKeyCode() == 'R')
         setup();
         

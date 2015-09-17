@@ -8,9 +8,11 @@ public class BohrNeutron extends Particle
     @Override
     public void drawParticle()
     {
-        noStroke();
-        fill(#4560E3);
-        ellipse(getPosition().x, getPosition().y, getRadius()*2, getRadius()*2);
-        stroke(0);
+       noStroke();
+       fill(#4560E3);
+       translate(getPosition().x, getPosition().y, getPosition().z);
+       sphere(getRadius());
+       stroke(0);
+       translate(-getPosition().x, -getPosition().y, -getPosition().z);
     }
 }
