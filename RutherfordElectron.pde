@@ -14,7 +14,6 @@ public class RutherfordElectron extends Particle
         angularVel = random(.05, .1);
         this.orbitRotation = orbitRotation;
         rotOffset = random(-PI/6, PI/6);
-        println(degrees(orbitRotation));
     }
     
     public void drawParticle()
@@ -27,9 +26,11 @@ public class RutherfordElectron extends Particle
        rotateY(PI/2);
        rotateX(orbitRotation);
        rotateY(PI/4);
+       //draw orbit ring
        noFill();
        ellipse(0, 0, orbitRadius*2, orbitRadius*2/3f);
        
+       //draw electron
        noStroke();
        fill(204, 254, 255);
        translate(getPosition().x, getPosition().y);

@@ -22,10 +22,12 @@ public class RutherfordModel extends AtomModel
     {
         pushMatrix();
         translate(getPosition().x, getPosition().y);
+
         for(Particle p : nucleusParticles)
-           p.drawParticle();
+            p.drawParticle();
         for(Particle p : orbitalParticles)
-            p.drawParticle();      
+            p.drawParticle(); 
+        
         fill(0);
         textSize(15);
         textAlign(CENTER);
@@ -33,7 +35,7 @@ public class RutherfordModel extends AtomModel
         popMatrix();
     }
     
-    private void generateNucleus()
+    private void generateBadNucleus()
     {
         float angle = 0;
         for(int i = 0; i < NUM_NEUTRONS + NUM_PROTONS; i++)
@@ -51,4 +53,39 @@ public class RutherfordModel extends AtomModel
             angle += 2*PI/NUM_PROTONS/2;
         }
     }
+    
+     private void generateNucleus()
+    {    
+        int radius = 3;
+        for(int i = 0; i < NUM_NEUTRONS; i++)
+        {
+           float u = random(-1.0, 1.0);
+           float theta = random(0, 2*PI);
+           float x = sqrt(1-u*u)*cos(theta);
+           float y = sqrt(1-u*u)*sin(theta);
+           float z = u;
+           
+           PVector neutronPos = new PVector(x*radius, y*radius, z*radius);
+           PVector neutronVel = new PVector(0, 0);
+           RutherfordNeutron neutron = new RutherfordNeutron(neutronPos, neutronVel, 3);
+           nucleusParticles.add(neutron);
+        }
+        
+        for(int i = 0; i < NUM_PROTONS; i++)
+        {
+            
+         float u = random(-1.0, 1.0);
+         float theta = random(0, 2*PI);
+         float x = sqrt(1-u*u)*cos(theta);
+         float y = sqrt(1-u*u)*sin(theta);
+         float z = u;
+            
+         PVector protonPos = new PVector(x*radius, y*radius, z*radius);
+         PVector protonVel = new PVector(0, 0);
+         RutherfordProton proton = new RutherfordProton(protonPos, protonVel, 3);
+         nucleusParticles.add(proton);
+        }
+        
+    }
+    
 }

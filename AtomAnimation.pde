@@ -8,14 +8,14 @@ float cameraRot;
 public void setup()
 {
     size(400, 400, P3D);
-    scaleFactor = 1;
+    scaleFactor = 4.0f;
     models = new AtomModel[5];
     models[0] = new DaltonModel();
     models[1] = new ThomsonModel();
     models[2] = new RutherfordModel();
     models[3] = new BohrModel();
     models[4] = new QuantumMechanicsModel();
-    modelsIndex = 1;
+    modelsIndex = 2;
     targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
     cameraX = targetPos.x;
     cameraY = targetPos.y;
@@ -61,6 +61,8 @@ public void keyPressed(KeyEvent e)
         cameraRot += PI/6;
     if(e.getKeyCode() == 'D')
         cameraRot -= PI/6;
+    if(e.getKeyCode() == 'R')
+        setup();
         
     targetPos = new PVector(models[modelsIndex].getPosition().x, models[modelsIndex].getPosition().y);
 }
