@@ -8,14 +8,14 @@ float cameraRotY, cameraRotX;
 public void setup()
 {
     size(400, 400, P3D);
-    scaleFactor = 4.0f;
+    scaleFactor = 7.0f;
     models = new AtomModel[5];
     models[0] = new DaltonModel();
     models[1] = new ThomsonModel();
     models[2] = new RutherfordModel();
     models[3] = new BohrModel();
     models[4] = new QuantumMechanicsModel();
-    modelsIndex = 3;
+    modelsIndex = 1;
     targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
     cameraX = targetPos.x;
     cameraY = targetPos.y;

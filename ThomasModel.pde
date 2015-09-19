@@ -2,7 +2,7 @@ private class ThomsonModel extends AtomModel
 {
     private ArrayList<Particle> particles;
    
-    private final int NUM_ELECTRONS = 1;
+    private final int NUM_ELECTRONS = 5;
     
     public ThomsonModel()
     {
@@ -29,7 +29,7 @@ private class ThomsonModel extends AtomModel
         pushMatrix();
         
         translate(getPosition().x, getPosition().y);
-        fill(100, 100, 10);
+        fill(205, 103, 204);
         sphere(getRadius());
         
         for(Particle p : particles)
