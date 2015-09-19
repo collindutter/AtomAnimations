@@ -13,7 +13,7 @@ private class ThomasElectron extends Particle
     {
         getPosition().add(getVelocity());
 
-        if(getPosition().mag() + getRadius() >= container.getRadius())
+        if(getPosition().mag() + getRadius() >= container.getRadius()-1)
         {
             PVector position = new PVector(getPosition().x, getPosition().y, getPosition().z);
             PVector velocity = new PVector(getVelocity().x, getVelocity().y, getVelocity().z);
