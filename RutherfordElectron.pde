@@ -4,7 +4,6 @@ public class RutherfordElectron extends Particle
     private float orbitRadius;//radius of particle from center of atom
     private float angularVel;//velocity at which particle moves
     private float orbitRotation;//angle at which the orbit occurs
-    private float rotOffset;
     
     public RutherfordElectron(float orbitRotation)
     {
@@ -12,8 +11,7 @@ public class RutherfordElectron extends Particle
         orbitAngle = random(0, 2 * PI);
         orbitRadius = 30;
         angularVel = random(.05, .1);
-        this.orbitRotation = orbitRotation;
-        rotOffset = random(-PI/6, PI/6);
+        this.orbitRotation = orbitRotation;   
     }
     
     public void drawParticle()
@@ -25,7 +23,7 @@ public class RutherfordElectron extends Particle
        setPosition(new PVector(x, y));
        rotateY(PI/2);
        rotateX(orbitRotation);
-       rotateY(PI/4);
+       rotateY(PI/3);
        //draw orbit ring
        noFill();
        ellipse(0, 0, orbitRadius*2, orbitRadius*2/3f);
@@ -37,11 +35,9 @@ public class RutherfordElectron extends Particle
        sphere(getRadius());
        stroke(0);
        translate(-getPosition().x, -getPosition().y);
-       rotateY(-PI/4);
+       rotateY(-PI/3);
        rotateX(-orbitRotation);
        rotateY(-PI/2);
-       
-       //rotateY(-orbitRotation);
        
        
     }

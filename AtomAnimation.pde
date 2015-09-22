@@ -26,7 +26,7 @@ public void setup()
 public void draw()
 {
     //set background and basic stroke colors
-    background(255);
+    background(#86A7FF);
     lights();
     stroke(0);
 

@@ -11,7 +11,13 @@ private class ThomsonModel extends AtomModel
         
         for(int i = 0; i < NUM_ELECTRONS; i++)
         {
-            PVector elecPos = new PVector(random(-getRadius() + 12, getRadius() - 12), random(-getRadius() + 12, getRadius() - 12), random(-getRadius() + 12, getRadius() - 12));
+            float u = random(-1.0, 1.0);
+            float theta = random(0, 2*PI);
+            float x = sqrt(1-u*u)*cos(theta);
+            float y = sqrt(1-u*u)*sin(theta);
+            float z = u;
+           
+            PVector elecPos = new PVector(x*(getRadius()-12), y*(getRadius()-12), z*(getRadius()-12));
             PVector elecVel = new PVector(random(-.5f, .5f), random(-.5f, .5f), random(-.5f, .5f));  
             particles.add(new ThomasElectron(this, elecPos, elecVel));
         }
