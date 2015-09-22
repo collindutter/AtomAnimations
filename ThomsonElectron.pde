@@ -11,8 +11,10 @@ private class ThomasElectron extends Particle
     @Override
     public void drawParticle()
     {
+        //move the electrons
         getPosition().add(getVelocity());
-
+        
+        //check and handle collisions
         if(getPosition().mag() + getRadius() >= container.getRadius()-1)
         {
             PVector position = new PVector(getPosition().x, getPosition().y, getPosition().z);
@@ -21,13 +23,13 @@ private class ThomasElectron extends Particle
             PVector reflect = velocity.sub(normal.mult(2 * velocity.dot(normal)));
             setVelocity(reflect);
         }
-         
+        
+        //draw the electrons
         noStroke();
         fill(204, 254, 255);
         translate(getPosition().x, getPosition().y, getPosition().z);
         sphere(getRadius());
         stroke(0);
         translate(-getPosition().x, -getPosition().y, -getPosition().z);
- //<>//
     }
 }

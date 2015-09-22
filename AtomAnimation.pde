@@ -1,8 +1,8 @@
-float cameraX, cameraY;
-float scaleFactor;
-AtomModel[] models;
-int modelsIndex;
-PVector targetPos;
+PVector cameraPos; //camera position
+float scaleFactor; //zoom scale factor
+AtomModel[] models; 
+int modelsIndex; //which model the camera is currently viewing
+PVector targetPos; //Position for the camera to move to
 float cameraRotY, cameraRotX;
 
 public void setup()
@@ -17,8 +17,7 @@ public void setup()
     models[4] = new QuantumMechanicsModel();
     modelsIndex = 0;
     targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
-    cameraX = targetPos.x;
-    cameraY = targetPos.y;
+    cameraPos = targetPos;
     cameraRotY = 0;
     cameraRotX = 0;
 }
@@ -31,21 +30,23 @@ public void draw()
     stroke(0);
 
     pushMatrix();
-    //scale based on zoom
-   
+    //scale based on zoom   
     translate(width / 2, height / 2);
     rotateY(cameraRotY);
     rotateX(cameraRotX);
     scale(scaleFactor);
     
-    cameraX += (targetPos.x - cameraX) / 15;
-    cameraY += (targetPos.y - cameraY) / 15;
-    translate(-cameraX, -cameraY);
+    //move camera according to target position using fake interpolation :(
+    cameraPos.x += (targetPos.x - cameraPos.x) / 15;
+    cameraPos.y += (targetPos.y - cameraPos.y) / 15;
+    translate(-cameraPos.x, -cameraPos.y);
 
+    //draw all the models
     for(int i = 0; i < models.length; i++)
         models[i].drawModel();
         
     popMatrix();
+    //framerate debugger. ****REMOVE****
     text((int)frameRate, 12, 15);
 }
 
@@ -69,6 +70,6 @@ public void keyPressed(KeyEvent e)
         cameraRotX += PI/6;
     if(e.getKeyCode() == 'R')
         setup();
-        
+     
     targetPos = new PVector(models[modelsIndex].getPosition().x, models[modelsIndex].getPosition().y);
 }

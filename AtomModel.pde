@@ -1,8 +1,8 @@
 public abstract class AtomModel
 {
-    private String name;
-    private int radius;
-    private PVector position;
+    private String name; //Name of the model
+    private int radius; //Radius of the model
+    private PVector position; //It's position in the world
    
 
     public AtomModel(String name, int radius, PVector position)
@@ -12,8 +12,12 @@ public abstract class AtomModel
         this.position = position;
     }
 
+    /**
+    *Draws the atom model
+    */
     public abstract void drawModel();
 
+    //GETTERS AND SETTERS
     public String getName(){return name;}
     public PVector getPosition(){return position;}
     public int getRadius(){return radius;}

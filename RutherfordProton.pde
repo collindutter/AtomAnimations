@@ -8,7 +8,6 @@ public class RutherfordProton extends Particle
     @Override
     public void drawParticle()
     {
-       
        noStroke();
        fill(#E34545);
        translate(getPosition().x, getPosition().y, getPosition().z);

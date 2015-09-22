@@ -9,6 +9,7 @@ private class ThomsonModel extends AtomModel
         super("Thomson Model", 45, new PVector(300, height / 2));
         particles = new ArrayList<Particle>();
         
+        //place the electrons in the models
         for(int i = 0; i < NUM_ELECTRONS; i++)
         {
             float u = random(-1.0, 1.0);
@@ -23,27 +24,22 @@ private class ThomsonModel extends AtomModel
         }
     }
 
-    /**
-     * draws the Thomson model of the atom
-     *
-     * @param centerX x coordinate to center the atom upon
-     * @param centerY y  to center the atom upon
-     */
     @Override
     public void drawModel()
     {
         pushMatrix();
-        
         translate(getPosition().x, getPosition().y);
+        
+        //draw the particles
         for(Particle p : particles)
             p.drawParticle();
-            
+        
+        //draw the model
         noStroke();
         fill(205, 103, 204, 128);
         sphere(getRadius());
-        
-
-
+       
+        //draw the text
         fill(0);
         textSize(15);
         textAlign(CENTER);

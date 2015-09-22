@@ -7,10 +7,9 @@ public class BohrProton extends Particle
     
     @Override
     public void drawParticle()
-    {
-       
+    { 
        noStroke();
-        fill(#E34545);
+       fill(#E34545);
        translate(getPosition().x, getPosition().y, getPosition().z);
        sphere(getRadius());
        stroke(0);

@@ -12,17 +12,21 @@ public class BohrElectron extends Particle
         angularVel = random(.05, .1);
     }
     
+    @Override
     public void drawParticle()
     {
+       //math for rotating electorns
        orbitAngle += angularVel;
        float x = orbitRadius*cos(orbitAngle);
        float y = orbitRadius*sin(orbitAngle);
        setPosition(new PVector(x, y));
        
+       //draw the orbit ring
        noFill();
        stroke(1);
        ellipse(0, 0, orbitRadius*2, orbitRadius*2);
-       
+          
+       //draw the electron
        noStroke();
        fill(204, 254, 255);
        pushMatrix();

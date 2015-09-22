@@ -1,6 +1,6 @@
 public class RutherfordModel extends AtomModel
 {
-    private ArrayList<Particle> nucleusParticles;
+    private ArrayList<Particle> nucleusParticles; 
     private ArrayList<Particle> orbitalParticles;
     
     private final int NUM_PROTONS = 7;
@@ -35,8 +35,12 @@ public class RutherfordModel extends AtomModel
         popMatrix();
     }
     
+    /**
+    *Generates a nucleus for the atom model
+    */
     private void generateNucleus()
-    {    
+    {   
+        //generate the neutrons
         int radius = 3;
         for(int i = 0; i < NUM_NEUTRONS; i++)
         {
@@ -52,6 +56,7 @@ public class RutherfordModel extends AtomModel
            nucleusParticles.add(neutron);
         }
         
+        //generate the protons
         for(int i = 0; i < NUM_PROTONS; i++)
         {
             

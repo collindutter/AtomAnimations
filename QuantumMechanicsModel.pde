@@ -5,6 +5,7 @@ public class QuantumMechanicsModel extends AtomModel
         super("Quantum Mechanics Model", 25, new PVector(900, height / 2));
     }
     
+    @Override
     public void drawModel()
     {
        pushMatrix(); 

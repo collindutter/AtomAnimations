@@ -1,7 +1,7 @@
 public class BohrModel extends AtomModel
 {
-    private ArrayList<Particle> nucleusParticles;
-    private ArrayList<Particle> orbitalParticles;
+    private ArrayList<Particle> nucleusParticles; //array to hold the protons and nuetrons in nucleus
+    private ArrayList<Particle> orbitalParticles; //array to hold the oribiting electrons
     
     private final int NUM_PROTONS = 3;
     private final int NUM_NEUTRONS = 3;
@@ -17,6 +17,7 @@ public class BohrModel extends AtomModel
             orbitalParticles.add(new BohrElectron(i*10));
     }
     
+    @Override
     public void drawModel()
     {
         pushMatrix();
@@ -34,9 +35,13 @@ public class BohrModel extends AtomModel
         popMatrix();
     }
     
+    /**
+    *Generates a nucleus for the atom model
+    */
     private void generateNucleus()
     {    
         int radius = 3;
+        //generate the neutrons for the model
         for(int i = 0; i < NUM_NEUTRONS; i++)
         {
            float u = random(-1.0, 1.0);
@@ -51,6 +56,7 @@ public class BohrModel extends AtomModel
            nucleusParticles.add(neutron);
         }
         
+        //generate the protons for the model
         for(int i = 0; i < NUM_PROTONS; i++)
         {
             

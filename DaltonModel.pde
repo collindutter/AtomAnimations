@@ -5,24 +5,23 @@ public class DaltonModel extends AtomModel
         super("Dalton Model", 45, new PVector(100, height / 2));
     }
 
-    /**
-     * draws the Dalton model of the atom
-     *
-     * @param centerX x coordinate to center the atom upon
-     * @param centerY y coordinate to center the atom upon
-     */
     @Override
     public void drawModel()
     {
         pushMatrix();
         translate(getPosition().x, getPosition().y);
+        
+        //draw the model
         fill(205, 103, 204);
         noStroke();
         sphere(getRadius());
+        
+        //draw the text
         textSize(15);
         textAlign(CENTER);
         fill(0);
         text(getName(), 0, getRadius() + 15);
+        
         popMatrix();
     }    
 }

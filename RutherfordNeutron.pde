@@ -13,7 +13,6 @@ public class RutherfordNeutron extends Particle
        translate(getPosition().x, getPosition().y, getPosition().z);
        sphere(getRadius());
        stroke(0);
-       translate(-getPosition().x, -getPosition().y, -getPosition().z);
-        
+       translate(-getPosition().x, -getPosition().y, -getPosition().z);   
     }
 }
