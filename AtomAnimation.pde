@@ -35,16 +35,16 @@ public void draw()
     rotateY(cameraRotY);
     rotateX(cameraRotX);
     scale(scaleFactor);
-    
+
     //move camera according to target position using fake interpolation :(
     cameraPos.x += (targetPos.x - cameraPos.x) / 15;
     cameraPos.y += (targetPos.y - cameraPos.y) / 15;
     translate(-cameraPos.x, -cameraPos.y);
 
     //draw all the models
-    for(int i = 0; i < models.length; i++)
+    for (int i = 0; i < models.length; i++)
         models[i].drawModel();
-        
+
     popMatrix();
     //framerate debugger. ****REMOVE****
     text((int)frameRate, 12, 15);
@@ -52,24 +52,24 @@ public void draw()
 
 public void keyPressed(KeyEvent e)
 {
-    if(e.getKeyCode() == LEFT && modelsIndex > 0)
-       modelsIndex--;
-    if(e.getKeyCode() == RIGHT && modelsIndex < models.length - 1)
+    if (e.getKeyCode() == LEFT && modelsIndex > 0)
+        modelsIndex--;
+    if (e.getKeyCode() == RIGHT && modelsIndex < models.length - 1)
         modelsIndex++;
-    if(e.getKeyCode() == UP && scaleFactor < 7.0f)
+    if (e.getKeyCode() == UP && scaleFactor < 7.0f)
         scaleFactor+=.5;
-    if(e.getKeyCode() == DOWN && scaleFactor > 1.0f)
+    if (e.getKeyCode() == DOWN && scaleFactor > 1.0f)
         scaleFactor-=.5;
-    if(e.getKeyCode() == 'A')
+    if (e.getKeyCode() == 'A')
         cameraRotY += PI/6;
-    if(e.getKeyCode() == 'D')
+    if (e.getKeyCode() == 'D')
         cameraRotY -= PI/6;
-    if(e.getKeyCode() == 'W')
+    if (e.getKeyCode() == 'W')
         cameraRotX -= PI/6;
-    if(e.getKeyCode() == 'S')
+    if (e.getKeyCode() == 'S')
         cameraRotX += PI/6;
-    if(e.getKeyCode() == 'R')
+    if (e.getKeyCode() == 'R')
         setup();
-     
+
     targetPos = new PVector(models[modelsIndex].getPosition().x, models[modelsIndex].getPosition().y);
 }

@@ -13,9 +13,9 @@ private class ThomasElectron extends Particle
     {
         //move the electrons
         getPosition().add(getVelocity());
-        
+
         //check and handle collisions
-        if(getPosition().mag() + getRadius() >= container.getRadius()-1)
+        if (getPosition().mag() + getRadius() >= container.getRadius()-1)
         {
             PVector position = new PVector(getPosition().x, getPosition().y, getPosition().z);
             PVector velocity = new PVector(getVelocity().x, getVelocity().y, getVelocity().z);
@@ -23,7 +23,7 @@ private class ThomasElectron extends Particle
             PVector reflect = velocity.sub(normal.mult(2 * velocity.dot(normal)));
             setVelocity(reflect);
         }
-        
+
         //draw the electrons
         noStroke();
         fill(204, 254, 255);
