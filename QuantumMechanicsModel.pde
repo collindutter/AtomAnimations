@@ -17,10 +17,12 @@ public class QuantumMechanicsModel extends AtomModel
         super.drawModel();
         pushMatrix(); 
         translate(getPosition().x, getPosition().y);
-        noFill();
-        stroke(0);
-        ellipse(0, 0, getRadius()*2, getRadius()*2);
         proton.drawParticle();
+        fill(0, 0, 0, 30);
+        noStroke();
+        rotateX(-PI/6);
+        sphere(getRadius());
+        rotateX(PI/6);
         popMatrix();
     }
 }

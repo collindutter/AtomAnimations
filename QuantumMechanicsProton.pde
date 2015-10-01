@@ -18,8 +18,8 @@ public class QuantumMechanicsProton extends Particle
             float x = sqrt(1-u*u)*cos(theta);
             float y = sqrt(1-u*u)*sin(theta);
             float z = u;
-    
-            PVector protonPos = new PVector(x*container.getRadius(), y*container.getRadius(), z*container.getRadius());
+            float spawnRadius = container.getRadius()-getRadius();
+            PVector protonPos = new PVector(x*spawnRadius, y*spawnRadius, z*spawnRadius);
             PVector protonVel = new PVector(0, 0);
             setPosition(protonPos);
             setVelocity(protonVel);
