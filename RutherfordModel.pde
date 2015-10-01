@@ -19,6 +19,7 @@ public class RutherfordModel extends AtomModel
 
     public void drawModel()
     {
+        super.drawModel();
         pushMatrix();
         translate(getPosition().x, getPosition().y);
 
@@ -26,11 +27,6 @@ public class RutherfordModel extends AtomModel
             p.drawParticle();
         for (Particle p : orbitalParticles)
             p.drawParticle(); 
-
-        fill(0);
-        textSize(15);
-        textAlign(CENTER);
-        text(getName(), 0, 30 + 15);
         popMatrix();
     }
 
@@ -40,7 +36,7 @@ public class RutherfordModel extends AtomModel
     private void generateNucleus()
     {   
         //generate the neutrons
-        int radius = 3;
+        int radius = 6;
         for (int i = 0; i < NUM_NEUTRONS; i++)
         {
             float u = random(-1.0, 1.0);

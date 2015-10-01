@@ -4,7 +4,7 @@ public class QuantumMechanicsProton extends Particle
     
     public QuantumMechanicsProton(AtomModel container)
     {
-        super(new PVector(0, 0, 0), new PVector(0, 0, 0), 3);
+        super(new PVector(0, 0, 0), new PVector(0, 0, 0));
         this.container = container;
     }
 

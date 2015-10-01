@@ -8,6 +8,7 @@ public class DaltonModel extends AtomModel
     @Override
     public void drawModel()
     {
+        super.drawModel();
         pushMatrix();
         translate(getPosition().x, getPosition().y);
 
@@ -16,12 +17,8 @@ public class DaltonModel extends AtomModel
         noStroke();
         sphere(getRadius());
 
-        //draw the text
-        textSize(15);
-        textAlign(CENTER);
-        fill(0);
-        text(getName(), 0, getRadius() + 15);
-
+        
+        
         popMatrix();
     }
 }

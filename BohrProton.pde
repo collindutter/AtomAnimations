@@ -2,7 +2,7 @@ public class BohrProton extends Particle
 {
     public BohrProton(PVector position, PVector velocity, int radius)
     {
-        super(position, velocity, radius);
+        super(position, velocity);
     }
 
     @Override

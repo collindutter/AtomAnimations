@@ -6,7 +6,7 @@ public class BohrElectron extends Particle
 
     public BohrElectron(float orbitRadius)
     {
-        super(new PVector(0, 0), new PVector(0, 0), 3);
+        super(new PVector(0, 0), new PVector(0, 0));
         orbitAngle = random(0, 2 * PI);
         this.orbitRadius = orbitRadius;
         angularVel = random(.05, .1);

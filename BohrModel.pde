@@ -14,12 +14,13 @@ public class BohrModel extends AtomModel
         orbitalParticles = new ArrayList<Particle>();
         generateNucleus();
         for (int i = 1; i <= NUM_ELECTRONS; i++)
-            orbitalParticles.add(new BohrElectron(i*10));
+            orbitalParticles.add(new BohrElectron(i*15));
     }
 
     @Override
     public void drawModel()
     {
+        super.drawModel();
         pushMatrix();
         translate(getPosition().x, getPosition().y);
 
@@ -27,11 +28,7 @@ public class BohrModel extends AtomModel
             p.drawParticle();
         for (Particle p : orbitalParticles)
             p.drawParticle();
-
-        fill(0);
-        textSize(15);
-        textAlign(CENTER);
-        text(getName(), 0, NUM_ELECTRONS*10 + 15);
+            
         popMatrix();
     }
 

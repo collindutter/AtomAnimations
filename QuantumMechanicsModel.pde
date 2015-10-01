@@ -14,16 +14,13 @@ public class QuantumMechanicsModel extends AtomModel
     @Override
     public void drawModel()
     {
+        super.drawModel();
         pushMatrix(); 
         translate(getPosition().x, getPosition().y);
         noFill();
         stroke(0);
         ellipse(0, 0, getRadius()*2, getRadius()*2);
         proton.drawParticle();
-        fill(0);
-        textSize(15);
-        textAlign(CENTER);
-        text(getName(), 0, getRadius() + 15);
         popMatrix();
     }
 }

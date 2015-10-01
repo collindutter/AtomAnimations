@@ -2,7 +2,7 @@ public class BohrNeutron extends Particle
 {
     public BohrNeutron(PVector position, PVector velocity, int radius)
     {
-        super(position, velocity, radius);
+        super(position, velocity);
     }
 
     @Override

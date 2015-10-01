@@ -27,6 +27,7 @@ private class ThomsonModel extends AtomModel
     @Override
     public void drawModel()
     {
+        super.drawModel();
         pushMatrix();
         translate(getPosition().x, getPosition().y);
 
@@ -40,12 +41,7 @@ private class ThomsonModel extends AtomModel
         rotateX(-PI/6);
         sphere(getRadius());
         rotateX(PI/6);
-
-        //draw the text
-        fill(0);
-        textSize(15);
-        textAlign(CENTER);
-        text(getName(), 0, getRadius() + 15);
+        
         popMatrix();
     }
 }

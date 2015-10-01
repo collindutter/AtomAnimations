@@ -15,7 +15,13 @@ public abstract class AtomModel
     /**
      *Draws the atom model
      */
-    public abstract void drawModel();
+    public void drawModel()
+    {
+        fill(0);
+        textSize(15);
+        textAlign(CENTER);
+        text(getName(), position.x, 260);
+    }
     
     //GETTERS AND SETTERS
     public String getName()

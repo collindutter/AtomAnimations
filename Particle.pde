@@ -4,11 +4,11 @@ public abstract class Particle
     private PVector velocity; //velocity of particle relative to container
     private int radius; //radius of particle
 
-    public Particle(PVector position, PVector velocity, int radius)
+    public Particle(PVector position, PVector velocity)
     {
         this.position = position;
         this.velocity = velocity;
-        this.radius = radius;
+        radius = 5;
     }
 
     /**

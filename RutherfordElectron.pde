@@ -7,9 +7,9 @@ public class RutherfordElectron extends Particle
 
     public RutherfordElectron(float orbitRotation)
     {
-        super(new PVector(0, 0), new PVector(0, 0), 3);
+        super(new PVector(0, 0), new PVector(0, 0));
         orbitAngle = random(0, 2 * PI);
-        orbitRadius = 30;
+        orbitRadius = 45;
         angularVel = random(.05, .1);
         this.orbitRotation = orbitRotation;
     }

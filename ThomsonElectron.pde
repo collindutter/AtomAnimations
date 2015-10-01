@@ -4,7 +4,7 @@ private class ThomasElectron extends Particle
 
     public ThomasElectron(AtomModel container, PVector position, PVector velocity)
     {
-        super(position, velocity, 6);
+        super(position, velocity);
         this.container = container;
     }
 

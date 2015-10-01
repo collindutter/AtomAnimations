@@ -2,7 +2,7 @@ public class RutherfordProton extends Particle
 {
     public RutherfordProton(PVector position, PVector velocity, int radius)
     {
-        super(position, velocity, radius);
+        super(position, velocity);
     }
 
     @Override
