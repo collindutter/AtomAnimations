@@ -16,7 +16,7 @@ public abstract class AtomModel
      *Draws the atom model
      */
     public abstract void drawModel();
-
+    
     //GETTERS AND SETTERS
     public String getName()
     {
