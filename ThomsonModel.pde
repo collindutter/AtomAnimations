@@ -37,7 +37,9 @@ private class ThomsonModel extends AtomModel
         //draw the model
         noStroke();
         fill(205, 103, 204, 128);
+        rotateX(-PI/6);
         sphere(getRadius());
+        rotateX(PI/6);
 
         //draw the text
         fill(0);
