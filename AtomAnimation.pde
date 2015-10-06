@@ -1,13 +1,14 @@
-PVector cameraPos; //camera position
-float scaleFactor; //zoom scale factor
-AtomModel[] models; 
-int modelsIndex; //which model the camera is currently viewing
-PVector targetPos; //Position for the camera to move to
-float cameraRotY, cameraRotX;
+private PVector cameraPos; //camera position
+private float scaleFactor; //zoom scale factor
+private AtomModel[] models; 
+private int modelsIndex; //which model the camera is currently viewing
+private PVector targetPos; //Position for the camera to move to
+private float cameraRotY, cameraRotX;
 
 public void setup()
 {
     size(400, 400, P3D);
+    textMode(SHAPE);
     scaleFactor = 1.0f;
     models = new AtomModel[5];
     models[0] = new DaltonModel();
@@ -46,6 +47,7 @@ public void draw()
         models[i].drawModel();
 
     popMatrix();
+    
     //framerate debugger. ****REMOVE****
     text((int)frameRate, 12, 15);
 }
