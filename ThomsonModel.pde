@@ -2,7 +2,8 @@ private class ThomsonModel extends AtomModel
 {
     private ArrayList<Particle> particles;
 
-    private final int NUM_ELECTRONS = 5;
+    private int numElectrons = 5;
+    private int numProtons = 5;
 
     public ThomsonModel()
     {
@@ -10,7 +11,7 @@ private class ThomsonModel extends AtomModel
         particles = new ArrayList<Particle>();
 
         //place the electrons in the models
-        for (int i = 0; i < NUM_ELECTRONS; i++)
+        for (int i = 0; i < numElectrons; i++)
         {
             float u = random(-1.0, 1.0);
             float theta = random(0, 2*PI);
@@ -20,7 +21,21 @@ private class ThomsonModel extends AtomModel
 
             PVector elecPos = new PVector(x*(getRadius()-12), y*(getRadius()-12), z*(getRadius()-12));
             PVector elecVel = new PVector(random(-.5f, .5f), random(-.5f, .5f), random(-.5f, .5f));  
-            particles.add(new ThomasElectron(this, elecPos, elecVel));
+            particles.add(new ThomsonElectron(this, elecPos, elecVel));
+        }
+        
+        //place the protons in the models
+        for (int i = 0; i < numProtons; i++)
+        {
+            float u = random(-1.0, 1.0);
+            float theta = random(0, 2*PI);
+            float x = sqrt(1-u*u)*cos(theta);
+            float y = sqrt(1-u*u)*sin(theta);
+            float z = u;
+
+            PVector protPos = new PVector(x*(getRadius()-12), y*(getRadius()-12), z*(getRadius()-12));
+            PVector protVel = new PVector(0, 0, 0);  
+            particles.add(new ThomsonProton(this, protPos, protVel));
         }
     }
 

@@ -3,9 +3,9 @@ public class BohrModel extends AtomModel
     private ArrayList<Particle> nucleusParticles; //array to hold the protons and nuetrons in nucleus
     private ArrayList<Particle> orbitalParticles; //array to hold the oribiting electrons
 
-    private final int NUM_PROTONS = 3;
-    private final int NUM_NEUTRONS = 3;
-    private final int NUM_ELECTRONS = 3;
+    private int numProtons = 1;
+    private int numNeutrons = 1;
+    private int numElectrons = 1;
 
     public BohrModel()
     {
@@ -13,7 +13,7 @@ public class BohrModel extends AtomModel
         nucleusParticles = new ArrayList<Particle>();
         orbitalParticles = new ArrayList<Particle>();
         generateNucleus();
-        for (int i = 1; i <= NUM_ELECTRONS; i++)
+        for (int i = 1; i <= numElectrons; i++)
             orbitalParticles.add(new BohrElectron(i*15));
     }
 
@@ -28,6 +28,14 @@ public class BohrModel extends AtomModel
             p.drawParticle();
         for (Particle p : orbitalParticles)
             p.drawParticle();
+        
+        for(int i = 2; i < 4; i++)
+        {
+            //draw the orbit ring
+            noFill();
+            stroke(1);
+            ellipse(0, 0, 30*i, 30*i);
+        }
             
         popMatrix();
     }
@@ -39,7 +47,7 @@ public class BohrModel extends AtomModel
     {    
         int radius = 3;
         //generate the neutrons for the model
-        for (int i = 0; i < NUM_NEUTRONS; i++)
+        for (int i = 0; i < numNeutrons; i++)
         {
             float u = random(-1.0, 1.0);
             float theta = random(0, 2*PI);
@@ -54,7 +62,7 @@ public class BohrModel extends AtomModel
         }
 
         //generate the protons for the model
-        for (int i = 0; i < NUM_PROTONS; i++)
+        for (int i = 0; i < numProtons; i++)
         {
 
             float u = random(-1.0, 1.0);

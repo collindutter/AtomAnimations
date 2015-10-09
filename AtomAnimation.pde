@@ -1,24 +1,32 @@
 private PVector cameraPos; //camera position
 private float scaleFactor; //zoom scale factor
-private AtomModel[] models; 
-private int modelsIndex; //which model the camera is currently viewing
+private AtomModel[][] models; //list of all the models
+private int modelsIndexHoriz; //which model the camera is currently viewing
+private int modelsIndexVert;
 private PVector targetPos; //Position for the camera to move to
-private float cameraRotY, cameraRotX;
+private float cameraRotY, cameraRotX; //camera's rotation in X and Y planes
 
 public void setup()
 {
+    //Boring init stuff
     size(400, 400, P3D);
     textMode(SHAPE);
+    
     scaleFactor = 1.0f;
-    models = new AtomModel[5];
-    models[0] = new DaltonModel();
-    models[1] = new ThomsonModel();
-    models[2] = new RutherfordModel();
-    models[3] = new BohrModel();
-    models[4] = new QuantumMechanicsModel();
-    modelsIndex = 0;
-    targetPos = new PVector(models[modelsIndex].position.x, models[modelsIndex].position.y);
+    
+    models = new AtomModel[5][2];
+    models[0][0] = new DaltonModel();
+    models[1][0] = new ThomsonModel();
+    models[2][0] = new RutherfordModel();
+    models[2][1] = new RutherfordModel(1, 1, 1);
+    models[3][0] = new BohrModel();
+    models[4][0] = new QuantumMechanicsModel();
+    modelsIndexHoriz = 0;
+    modelsIndexVert = 0;
+    
+    targetPos = new PVector(models[modelsIndexHoriz][modelsIndexVert].position.x, models[modelsIndexHoriz][modelsIndexVert].position.y);
     cameraPos = targetPos;
+    
     cameraRotY = 0;
     cameraRotX = 0;
 }
@@ -43,8 +51,11 @@ public void draw()
     translate(-cameraPos.x, -cameraPos.y);
 
     //draw all the models
-    for (int i = 0; i < models.length; i++)
-        models[i].drawModel();
+    for (int i = 0; i < models.length; i++){
+        models[i][0].drawModel();
+        if(models[i][1] != null)
+            models[i][1].drawModel();
+    }
 
     popMatrix();
     
@@ -54,14 +65,22 @@ public void draw()
 
 public void keyPressed(KeyEvent e)
 {
-    if (e.getKeyCode() == LEFT && modelsIndex > 0)
-        modelsIndex--;
-    if (e.getKeyCode() == RIGHT && modelsIndex < models.length - 1)
-        modelsIndex++;
-    if (e.getKeyCode() == UP && scaleFactor < 7.0f)
-        scaleFactor+=.5;
-    if (e.getKeyCode() == DOWN && scaleFactor > 1.0f)
-        scaleFactor-=.5;
+    if (e.getKeyCode() == LEFT && modelsIndexHoriz > 0)
+    {
+        modelsIndexHoriz--;
+        if(models[modelsIndexHoriz][modelsIndexVert] == null)
+            modelsIndexVert = 1 - modelsIndexVert;
+    }
+    if (e.getKeyCode() == RIGHT && modelsIndexHoriz < models.length - 1)
+    {
+        modelsIndexHoriz++;
+        if(models[modelsIndexHoriz][modelsIndexVert] == null)
+            modelsIndexVert = 1 - modelsIndexVert;
+    }
+    if (e.getKeyCode() == UP && modelsIndexVert > 0)
+        modelsIndexVert--;
+    if (e.getKeyCode() == DOWN && modelsIndexVert < 1)
+        modelsIndexVert++;
     if (e.getKeyCode() == 'A')
         cameraRotY += PI/6;
     if (e.getKeyCode() == 'D')
@@ -73,5 +92,7 @@ public void keyPressed(KeyEvent e)
     if (e.getKeyCode() == 'R')
         setup();
 
-    targetPos = new PVector(models[modelsIndex].getPosition().x, models[modelsIndex].getPosition().y);
+    AtomModel targetModel = models[modelsIndexHoriz][modelsIndexVert];
+    if(targetModel != null)
+        targetPos = targetModel.getPosition();
 }
