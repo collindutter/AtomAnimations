@@ -21,7 +21,7 @@ public void setup()
     models[2][1] = new RutherfordModel(1, 1, 1);
     models[3][0] = new BohrModel();
     models[4][0] = new QuantumMechanicsModel();
-    modelsIndexHoriz = 4;
+    modelsIndexHoriz = 0;
     modelsIndexVert = 0;
     
     targetPos = new PVector(models[modelsIndexHoriz][modelsIndexVert].position.x, models[modelsIndexHoriz][modelsIndexVert].position.y);

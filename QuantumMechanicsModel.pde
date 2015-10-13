@@ -1,7 +1,8 @@
 public class QuantumMechanicsModel extends AtomModel
 {
     private ArrayList<Particle> nucleusParticles; //array to hold the oribiting electrons
-    private ArrayList<QuantumMechanicsElectron> electrons;
+    private ArrayList<QuantumMechanicsElectronTrail> electronTrails;
+    private QuantumMechanicsElectron electron;
 
     private int numNeutrons = 3;
     private int numProtons = 3;
@@ -11,7 +12,8 @@ public class QuantumMechanicsModel extends AtomModel
     {
         super("Quantum Mechanics Model", 25, new PVector(900, height / 2));
         nucleusParticles = new ArrayList<Particle>();
-        electrons = new ArrayList<QuantumMechanicsElectron>();
+        electronTrails = new ArrayList<QuantumMechanicsElectronTrail>();
+        electron = new QuantumMechanicsElectron(new PVector(0, 0, 0), new PVector(0, 0, 0));
         generateNucleus();
         
     }
@@ -26,8 +28,8 @@ public class QuantumMechanicsModel extends AtomModel
         for(Particle nucleusParticle : nucleusParticles)
            nucleusParticle.drawParticle();
             
-        if(electrons.size() == 500)
-            electrons = new ArrayList();
+        if(electronTrails.size() == 500)
+            electronTrails = new ArrayList();
         if(frameCount % 20 == 0)
         {   
             float u = random(-1.0, 1.0);
@@ -38,11 +40,16 @@ public class QuantumMechanicsModel extends AtomModel
 
             PVector elecPos = new PVector(x*getRadius(), y*getRadius(), z*getRadius());
             PVector elecVel = new PVector(0, 0, 0);
-            QuantumMechanicsElectron electron = new QuantumMechanicsElectron(elecPos, elecVel);
-            electrons.add( electron);   
+            
+            QuantumMechanicsElectronTrail electronTrail = new QuantumMechanicsElectronTrail(elecPos, elecVel);
+            electronTrails.add(electronTrail);   
+            
+            electron.setPosition(elecPos);
+            
         }
-        for(QuantumMechanicsElectron electron : electrons)
-            electron.drawParticle();
+        for(QuantumMechanicsElectronTrail trail : electronTrails)
+            trail.drawParticle();
+        electron.drawParticle();
             
         //fill(0, 0, 0, 30);
         //noStroke();

@@ -8,10 +8,13 @@ public class QuantumMechanicsElectron extends Particle
     @Override
     public void drawParticle()
     {
-        fill(0);
-        noSmooth();
-        point(getPosition().x, getPosition().y, getPosition().z);
-        smooth();
- 
+        //draw the electron
+        noStroke();
+        fill(204, 254, 255);
+        pushMatrix();
+        translate(getPosition().x, getPosition().y, getPosition().z);
+        sphere(getRadius());
+        translate(-getPosition().x, -getPosition().y, -getPosition().z);
+        popMatrix();
     }
 }
