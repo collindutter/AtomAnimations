@@ -9,6 +9,7 @@ public class QuantumMechanicsElectronTrail extends Particle
     public void drawParticle()
     {
         fill(0);
+        stroke(0);
         point(getPosition().x, getPosition().y, getPosition().z); 
     }
 }

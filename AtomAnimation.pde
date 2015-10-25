@@ -14,14 +14,15 @@ public void setup()
     
     scaleFactor = 1.0f;
     
-    models = new AtomModel[5][2];
+    models = new AtomModel[6][2];
     models[0][0] = new DaltonModel();
     models[1][0] = new ThomsonModel();
     models[2][0] = new RutherfordModel();
     models[2][1] = new RutherfordModel(1, 1, 1);
     models[3][0] = new BohrModel();
     models[4][0] = new QuantumMechanicsModel();
-    modelsIndexHoriz = 0;
+    models[5][0] = new QuantumMechanicsModelPOrbital();
+    modelsIndexHoriz = 5;
     modelsIndexVert = 0;
     
     targetPos = new PVector(models[modelsIndexHoriz][modelsIndexVert].position.x, models[modelsIndexHoriz][modelsIndexVert].position.y);
@@ -39,7 +40,7 @@ public void draw()
     stroke(0);
 
     pushMatrix();
-    //scale based on zoom   
+      //scale based on zoom   
     translate(width / 2, height / 2);
     rotateY(cameraRotY);
     rotateX(cameraRotX);
@@ -49,9 +50,9 @@ public void draw()
     cameraPos.x += (targetPos.x - cameraPos.x) / 15;
     cameraPos.y += (targetPos.y - cameraPos.y) / 15;
     translate(-cameraPos.x, -cameraPos.y);
-
     //draw all the models
-    for (int i = 0; i < models.length; i++){
+    for (int i = 0; i < models.length; i++)
+    {
         models[i][0].drawModel();
         if(models[i][1] != null)
             models[i][1].drawModel();
