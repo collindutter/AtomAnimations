@@ -61,24 +61,16 @@ public void draw()
     //draw all the models
     for (int i = 0; i < 5; i++)
     {
-        if(targetPos.dist(cameraPos) > 500)
-            continue;
-        println(i);
         for(int j = 0; j < 3; j++) //<>//
         {
-            if(models[i][j] == null)
+            if(models[i][j] == null || models[i][j].position.dist(cameraPos) > 200)
                 continue;
             models[i][j].drawModel();
         }
     }
-    
-    fill(#86A7FF, .85*cameraPos.z);
-    translate(0, 0, 250);
-    rect(0, 0, 1200, 400);
-
     popMatrix();
        
-    
+    fill(0);
     //framerate debugger. ****REMOVE****
     text((int)frameRate, 12, 15);
 }
