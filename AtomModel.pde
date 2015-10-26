@@ -20,7 +20,7 @@ public abstract class AtomModel
         fill(0);
         textSize(15);
         textAlign(CENTER);
-        text(getName(), position.x, 260);
+        text(getName(), position.x, 260, getPosition().z);
     }
     
     //GETTERS AND SETTERS

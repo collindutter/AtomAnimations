@@ -8,8 +8,9 @@ public class QuantumMechanicsElectronTrail extends Particle
     @Override
     public void drawParticle()
     {
-        fill(0);
         stroke(0);
+        strokeWeight(2);
         point(getPosition().x, getPosition().y, getPosition().z); 
+        strokeWeight(1);
     }
 }

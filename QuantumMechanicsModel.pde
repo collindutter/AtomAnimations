@@ -17,13 +17,13 @@ public class QuantumMechanicsModel extends AtomModel
         generateNucleus();
         
     }
-
+   
     @Override
     public void drawModel()
     {
         super.drawModel();
         pushMatrix(); 
-        translate(getPosition().x, getPosition().y);
+        translate(getPosition().x, getPosition().y, getPosition().z);
         
         for(Particle nucleusParticle : nucleusParticles)
            nucleusParticle.drawParticle();

@@ -9,7 +9,7 @@ public class QuantumMechanicsModelPOrbital extends AtomModel
     
     public QuantumMechanicsModelPOrbital()
     {
-        super("", 25, new PVector(1100, height / 2));
+        super("", 25, new PVector(900, height / 2, 500));
         electronTrails = new ArrayList<QuantumMechanicsElectronTrail>();
         electron = new QuantumMechanicsElectron(new PVector(0, 0, 0), new PVector(0, 0, 0));
     }
@@ -19,12 +19,12 @@ public class QuantumMechanicsModelPOrbital extends AtomModel
     {
         super.drawModel();
         pushMatrix(); 
-        translate(getPosition().x, getPosition().y);
+        translate(getPosition().x, getPosition().y, getPosition().z-200);
 
             
         if(electronTrails.size() == 500)
             electronTrails = new ArrayList();
-        if(frameCount % 1 == 0)
+        if(frameCount % 5 == 0)
         {   
             float u = random(-1.0, 1.0);
             float theta = random(0, 2*PI);
