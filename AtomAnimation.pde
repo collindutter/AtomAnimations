@@ -14,14 +14,15 @@ public void setup()
     
     scaleFactor = 1.8f;
     
-    models = new AtomModel[5][2];
+    models = new AtomModel[5][3];
     models[0][0] = new DaltonModel();
     models[1][0] = new ThomsonModel();
     models[2][0] = new RutherfordModel();
     models[2][1] = new RutherfordModel(1, 1, 1);
     models[3][0] = new BohrModel();
-    models[4][0] = new QuantumMechanicsModel();
+    models[4][0] = new QuantumMechanicsModelSOrbital();
     models[4][1] = new QuantumMechanicsModelPOrbital();
+    models[4][2] = new QuantumMechanicsModelSOrbital(new PVector(900, height/2 + 140, 300));
     modelsIndexHoriz = 0;
     modelsIndexVert = 0;
     
@@ -44,29 +45,35 @@ public void draw()
     pushMatrix();
     //scale based on zoom   
     translate(width / 2, height / 2);
-    //rotateY(cameraRotY);
-    //rotateX(cameraRotX);
+    rotateY(cameraRotY);
+    rotateX(cameraRotX);
     scale(scaleFactor);
 
     //move camera according to target position using fake interpolation :(
-    cameraPos.x += (targetPos.x - cameraPos.x) / 15;
-    cameraPos.y += (targetPos.y - cameraPos.y) / 15;
-    cameraPos.z += (targetPos.z - cameraPos.z) / 15;
+    cameraPos.x += (targetPos.x - cameraPos.x) / 10;
+    cameraPos.y += (targetPos.y - cameraPos.y) / 10;
+    cameraPos.z += (targetPos.z - cameraPos.z) / 5;
     translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
     
     //camera(cameraPos.x, cameraPos.y, (height/2.0) / tan(PI*30.0 / 180.0), width/2.0, height/2.0, 0, 0, 1, 0);
     
 
     //draw all the models
-    for (int i = 0; i < models.length; i++)
+    for (int i = 0; i < 5; i++)
     {
-        models[i][0].drawModel();
-        if(models[i][1] != null)
-            models[i][1].drawModel();
+        if(targetPos.dist(cameraPos) > 500)
+            continue;
+        println(i);
+        for(int j = 0; j < 3; j++) //<>//
+        {
+            if(models[i][j] == null)
+                continue;
+            models[i][j].drawModel();
+        }
     }
     
     fill(#86A7FF, .85*cameraPos.z);
-    translate(0, 0, 300);
+    translate(0, 0, 250);
     rect(0, 0, 1200, 400);
 
     popMatrix();
@@ -78,21 +85,13 @@ public void draw()
 
 public void keyPressed(KeyEvent e)
 {
-    if (e.getKeyCode() == LEFT && modelsIndexHoriz > 0)
-    {
+    if (e.getKeyCode() == LEFT && modelsIndexHoriz > 0 && models[modelsIndexHoriz-1][modelsIndexVert] != null)
         modelsIndexHoriz--;
-        if(models[modelsIndexHoriz][modelsIndexVert] == null)
-            modelsIndexVert = 1 - modelsIndexVert;
-    }
-    if (e.getKeyCode() == RIGHT && modelsIndexHoriz < models.length - 1)
-    {
+    if (e.getKeyCode() == RIGHT && modelsIndexHoriz < models.length - 1 && models[modelsIndexHoriz+1][modelsIndexVert] != null)
         modelsIndexHoriz++;
-        if(models[modelsIndexHoriz][modelsIndexVert] == null)
-            modelsIndexVert = 1 - modelsIndexVert;
-    }
-    if (e.getKeyCode() == UP && modelsIndexVert > 0)
+    if (e.getKeyCode() == UP && modelsIndexVert > 0 && models[modelsIndexHoriz][modelsIndexVert-1] != null)
         modelsIndexVert--;
-    if (e.getKeyCode() == DOWN && modelsIndexVert < 1)
+    if (e.getKeyCode() == DOWN && modelsIndexVert < 2 && models[modelsIndexHoriz][modelsIndexVert+1] != null)
         modelsIndexVert++;
     if (e.getKeyCode() == 'A')
         cameraRotY += PI/6;

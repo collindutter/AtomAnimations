@@ -2,6 +2,7 @@ public class QuantumMechanicsModelPOrbital extends AtomModel
 {
     private ArrayList<QuantumMechanicsElectronTrail> electronTrails;
     private QuantumMechanicsElectron electron;
+   
     
     private int numNeutrons = 3;
     private int numProtons = 3;
@@ -9,9 +10,10 @@ public class QuantumMechanicsModelPOrbital extends AtomModel
     
     public QuantumMechanicsModelPOrbital()
     {
-        super("", 25, new PVector(900, height / 2, 500));
+        super("Quantum Mechanics Model\nP Orbital", 9, new PVector(900, height / 2, 300));
         electronTrails = new ArrayList<QuantumMechanicsElectronTrail>();
         electron = new QuantumMechanicsElectron(new PVector(0, 0, 0), new PVector(0, 0, 0));
+      
     }
     
     @Override
@@ -19,12 +21,12 @@ public class QuantumMechanicsModelPOrbital extends AtomModel
     {
         super.drawModel();
         pushMatrix(); 
-        translate(getPosition().x, getPosition().y, getPosition().z-200);
+        translate(getPosition().x, getPosition().y, getPosition().z);
 
             
         if(electronTrails.size() == 500)
             electronTrails = new ArrayList();
-        if(frameCount % 5 == 0)
+        if(frameCount % 20 == 0)
         {   
             float u = random(-1.0, 1.0);
             float theta = random(0, 2*PI);
@@ -34,7 +36,7 @@ public class QuantumMechanicsModelPOrbital extends AtomModel
             //float y = (r-(r*random(0, 1)))*sin(theta);
             float x = r*cos(theta);
             float y = r*sin(theta);
-            float z = u;
+            float z = 0;
 
             PVector elecPos = new PVector(x*5, y*5, z*5);
             PVector elecVel = new PVector(0, 0, 0);
