@@ -15,22 +15,25 @@ public class RutherfordModel extends AtomModel
         numProtons = 3;
         numNeutrons = 3;
         numElectrons = 3;
+
         generateNucleus();
         for (int i = 0; i < numElectrons; i++)
             orbitalParticles.add(new RutherfordElectron(-PI/4+ 2*PI/numElectrons*i));
     }
     
-    public RutherfordModel(int protons, int neutrons, int electrons)
+    public RutherfordModel(int electrons, int rings)
     {
         super("", 25, new PVector(500, height*3/4));
         nucleusParticles = new ArrayList<Particle>();
         orbitalParticles = new ArrayList<Particle>();
-        numProtons = protons;
-        numNeutrons = neutrons;
+        numProtons = 1;
+        numNeutrons = 1;
         numElectrons = electrons;
         generateNucleus();
         for (int i = 0; i < numElectrons; i++)
             orbitalParticles.add(new RutherfordElectron(-PI/4+ 2*PI/numElectrons*i));
+        for(int i = 0; i < rings; i++)
+            orbitalParticles.add(new RutherfordElectronRing(-PI/4+ 2*PI/rings*i));
     }
 
     public void drawModel()
@@ -38,13 +41,13 @@ public class RutherfordModel extends AtomModel
         super.drawModel();
         pushMatrix();
         translate(getPosition().x, getPosition().y);
-
         for (Particle p : nucleusParticles)
             p.drawParticle();
         for (Particle p : orbitalParticles)
             p.drawParticle(); 
         popMatrix();
     }
+
 
     /**
      *Generates a nucleus for the atom model

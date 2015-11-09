@@ -19,11 +19,11 @@ public void setup()
     models[0][0] = new DaltonModel();
     models[1][0] = new ThomsonModel();
     models[2][0] = new RutherfordModel();
-    models[2][1] = new RutherfordModel(1, 1, 1);
+    models[2][1] = new RutherfordModel(1, 3);
     models[3][0] = new BohrModel();
     models[4][0] = new QuantumMechanicsModelSOrbital();
     models[4][1] = new QuantumMechanicsModelPOrbital();
-    models[4][2] = new QuantumMechanicsModelSOrbital(new PVector(900, height/2 + 140, 300));
+    models[4][2] = new QuantumMechanicsModelSOrbital(new PVector(900, height/2 + 140, 700));
     keysPressed = new boolean[512];
     modelsIndexHoriz = 0;
     modelsIndexVert = 0;
@@ -96,11 +96,10 @@ public void keyPressed(KeyEvent e)
         modelsIndexVert--;
     if (e.getKeyCode() == DOWN && modelsIndexVert < models[0].length - 1 && models[modelsIndexHoriz][modelsIndexVert+1] != null)
         modelsIndexVert++;
-    
     if (e.getKeyCode() == 'R')
     {
         cameraRotX = 0;
-        cameraRotY = 0;
+        cameraRotY = 0; 
     }
 
     AtomModel targetModel = models[modelsIndexHoriz][modelsIndexVert];

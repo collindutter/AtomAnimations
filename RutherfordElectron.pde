@@ -27,11 +27,11 @@ public class RutherfordElectron extends Particle
         rotateY(PI/2);
         rotateX(orbitRotation);
         rotateY(PI/3);
-
+        
         //draw orbit ring
         noFill();
         ellipse(0, 0, orbitRadius*2, orbitRadius*2/3f);
-
+        
         //draw electron
         noStroke();
         fill(204, 254, 255);

@@ -10,7 +10,7 @@ public class QuantumMechanicsModelPOrbital extends AtomModel
     
     public QuantumMechanicsModelPOrbital()
     {
-        super("Quantum Mechanics Model\nP Orbital", 9, new PVector(900, height / 2, 300));
+        super("Quantum Mechanics Model\nP Orbital", 9, new PVector(900, height / 2, 700));
         electronTrails = new ArrayList<QuantumMechanicsElectronTrail>();
         electron = new QuantumMechanicsElectron(new PVector(0, 0, 0), new PVector(0, 0, 0));
       
