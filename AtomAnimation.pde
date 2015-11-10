@@ -4,6 +4,7 @@ private AtomModel[][] models; //list of all the models
 private int modelsIndexHoriz; //which model the camera is currently viewing
 private int modelsIndexVert;
 private PVector targetPos; //Position for the camera to move to
+private float targetScale; //Scale for the camera to adjust to
 private float cameraRotY, cameraRotX; //camera's rotation in X and Y planes
 private boolean[] keysPressed;
 
@@ -32,6 +33,8 @@ public void setup()
     
     targetPos = new PVector(targetModel.position.x, targetModel.position.y, targetModel.position.z);
     cameraPos = targetPos;
+    
+    targetScale = models[modelsIndexHoriz][modelsIndexVert].getScale();
     
     cameraRotY = 0;
     cameraRotX = 0;

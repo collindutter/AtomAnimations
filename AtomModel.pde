@@ -3,13 +3,14 @@ public abstract class AtomModel
     private String name; //Name of the model
     private int radius; //Radius of the model
     private PVector position; //It's position in the world
-
+    private float scale;
 
     public AtomModel(String name, int radius, PVector position)
     {
         this.name = name;
         this.radius = radius;
         this.position = position;
+        this.scale = 1f;
     }
 
     /**
@@ -35,5 +36,9 @@ public abstract class AtomModel
     public int getRadius()
     {
         return radius;
+    }
+    public float getScale()
+    {
+         return scale;   
     }
 }
