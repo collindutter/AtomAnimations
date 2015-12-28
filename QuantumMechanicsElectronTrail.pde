@@ -1,8 +1,13 @@
 public class QuantumMechanicsElectronTrail extends Particle
 {
-    public QuantumMechanicsElectronTrail(PVector position, PVector velocity)
+    public float rotation;
+    public int axis;
+    
+    public QuantumMechanicsElectronTrail(PVector position, PVector velocity, float rotation, int axis)
     {
         super(position, velocity);
+        this.rotation = rotation;
+        this.axis = axis;
     }
 
     @Override

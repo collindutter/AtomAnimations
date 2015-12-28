@@ -8,6 +8,8 @@ private class ThomsonProton extends Particle
     @Override
     public void drawParticle()
     {
+       
+        
         //draw the electrons
         noStroke();
         fill(#E34545);

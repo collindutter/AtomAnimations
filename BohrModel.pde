@@ -22,6 +22,7 @@ public class BohrModel extends AtomModel
     {
         super.drawModel();
         pushMatrix();
+        
         translate(getPosition().x, getPosition().y);
 
         for (Particle p : nucleusParticles)

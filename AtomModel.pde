@@ -10,7 +10,14 @@ public abstract class AtomModel
         this.name = name;
         this.radius = radius;
         this.position = position;
-        this.scale = 1f;
+        this.scale = 1.6f;
+    }
+    public AtomModel(String name, int radius, PVector position, float scale)
+    {
+        this.name = name;
+        this.radius = radius;
+        this.position = position;
+        this.scale = scale;
     }
 
     /**

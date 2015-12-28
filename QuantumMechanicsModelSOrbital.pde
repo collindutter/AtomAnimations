@@ -49,7 +49,7 @@ public class QuantumMechanicsModelSOrbital extends AtomModel
             PVector elecPos = new PVector(x*getRadius(), y*getRadius(), z*getRadius());
             PVector elecVel = new PVector(0, 0, 0);
             
-            QuantumMechanicsElectronTrail electronTrail = new QuantumMechanicsElectronTrail(elecPos, elecVel);
+            QuantumMechanicsElectronTrail electronTrail = new QuantumMechanicsElectronTrail(elecPos, elecVel, 0, 0);
             electronTrails.add(electronTrail);   
             
             electron.setPosition(elecPos);

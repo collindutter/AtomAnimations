@@ -27,7 +27,7 @@ public class RutherfordModel extends AtomModel
         nucleusParticles = new ArrayList<Particle>();
         orbitalParticles = new ArrayList<Particle>();
         numProtons = 1;
-        numNeutrons = 1;
+        numNeutrons = 0;
         numElectrons = electrons;
         generateNucleus();
         for (int i = 0; i < numElectrons; i++)

@@ -6,7 +6,12 @@ private int modelsIndexVert;
 private PVector targetPos; //Position for the camera to move to
 private float targetScale; //Scale for the camera to adjust to
 private float cameraRotY, cameraRotX; //camera's rotation in X and Y planes
+private float targetCameraRotY, targetCameraRotX;
 private boolean[] keysPressed;
+private int guiOffTime;
+private boolean drawGUI;
+private int guiOpacity;
+private boolean traveling;
 
 public void setup()
 {
@@ -14,7 +19,7 @@ public void setup()
     size(400, 400, P3D);
     textMode(SHAPE);
     
-    scaleFactor = 1.8f;
+    scaleFactor = 1.6f;
     
     models = new AtomModel[5][3];
     models[0][0] = new DaltonModel();
@@ -24,7 +29,7 @@ public void setup()
     models[3][0] = new BohrModel();
     models[4][0] = new QuantumMechanicsModelSOrbital();
     models[4][1] = new QuantumMechanicsModelPOrbital();
-    models[4][2] = new QuantumMechanicsModelSOrbital(new PVector(900, height/2 + 140, 700));
+    models[4][2] = new QuantumMechanicsModelSOrbital(new PVector(975, height/2, 650));
     keysPressed = new boolean[512];
     modelsIndexHoriz = 0;
     modelsIndexVert = 0;
@@ -38,6 +43,13 @@ public void setup()
     
     cameraRotY = 0;
     cameraRotX = 0;
+    targetCameraRotX = 0;
+    targetCameraRotY = 0;
+    
+    guiOffTime = 0;
+    guiOpacity = 0;
+    drawGUI = false;
+    traveling = false;
 }
 
 public void draw()
@@ -47,30 +59,66 @@ public void draw()
     lights();
     stroke(0);        
   
-    if(keysPressed['A'] && cameraRotY+PI/60 < PI/6)
-        cameraRotY+=PI/60;
-    if(keysPressed['D'] && cameraRotY-PI/60 > -PI/6)
-        cameraRotY-=PI/60;
-    if(keysPressed['S'] && cameraRotX+PI/60 < PI/6)
-        cameraRotX+=PI/60;
-    if(keysPressed['W'] && cameraRotX-PI/60 > -PI/6)
-        cameraRotX-=PI/60;
+    if(keysPressed['A'] && targetCameraRotY+PI/60 < PI/6)
+        targetCameraRotY+=PI/60;
+    if(keysPressed['D'] && targetCameraRotY-PI/60 > -PI/6)
+        targetCameraRotY-=PI/60;
+    if(keysPressed['S'] && targetCameraRotX+PI/60 < PI/6)
+        targetCameraRotX+=PI/60;
+    if(keysPressed['W'] && targetCameraRotX-PI/60 > -PI/6)
+        targetCameraRotX-=PI/60;
+    noStroke();
+    if(frameCount % 60 == 0)
+        guiOffTime++;
+    if(guiOffTime == 2)
+        drawGUI = true;
+    if(drawGUI && frameCount % 1 == 0 && guiOpacity < 255)
+        guiOpacity += 10;
+    if(!drawGUI && frameCount % 1 == 0 && guiOpacity > 0)
+        guiOpacity -= 10;
 
-    pushMatrix();
+    fill(#E34545, guiOpacity);
+    textAlign(LEFT);
+    ellipse(15, 15, 15, 15);
+    text("Proton", 30, 21);
     
+    fill(204, 254, 255, guiOpacity);
+    ellipse(15, 35, 15, 15);
+    text("Electron", 30, 42);
+    
+    fill(#4560E3, guiOpacity);
+    ellipse(15, 55, 15, 15);
+    text("Neutron",30, 62);
+    
+    textAlign(RIGHT);
+    fill(0, guiOpacity);
+    text("Camera: WASD", width, 15);
+    text("Move: Arrow Keys", width, 29);
+    
+    
+    
+    pushMatrix();
+
     translate(width / 2, height / 2);
     //rotate based on camera rotation
+    cameraRotX += (targetCameraRotX - cameraRotX) / 2f;
+    cameraRotY += (targetCameraRotY - cameraRotY) / 2f;
     rotateY(cameraRotY);
     rotateX(cameraRotX);
-    //scale based on zoom   
     scale(scaleFactor);
+    
 
     //move camera according to target position using fake interpolation :(
-    cameraPos.x += (targetPos.x - cameraPos.x) / 10;
-    cameraPos.y += (targetPos.y - cameraPos.y) / 10;
-    cameraPos.z += (targetPos.z - cameraPos.z) / 5;
+    if(abs(targetPos.dist(cameraPos)) > 30)
+        traveling = true;
+    else
+        traveling = false;
+    cameraPos.x += (targetPos.x - cameraPos.x) / 5f;
+    cameraPos.y += (targetPos.y - cameraPos.y) / 5f;
+    cameraPos.z += (targetPos.z - cameraPos.z) / 20f;
     translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
- 
+    
+    scaleFactor += (targetScale - scaleFactor) / 5f;
     //draw all the models
     for (int i = 0; i < models.length; i++)
     { 
@@ -78,36 +126,57 @@ public void draw()
         {
             if(models[i][j] == null || models[i][j].position.dist(cameraPos) > 250)
                 continue;
-            models[i][j].drawModel();
+            //if(modelsIndexHoriz == i && modelsIndexVert == j)
+            //{
+                
+            //    translate(models[i][j].position.x, models[i][j].position.y, models[i][j].position.z);
+            //    scale(scaleFactor);
+            //    translate(-models[i][j].position.x, -models[i][j].position.z, -models[i][j].position.z);
+            //} //<>//
+            models[i][j].drawModel();  
         }
     }
     popMatrix();
-       
-    fill(0);
-    //framerate debugger. ****REMOVE****
-    text((int)frameRate, 12, 15);
 }
 
 public void keyPressed(KeyEvent e)
 {
+    drawGUI = false;
+    guiOffTime = 0;
+    if(traveling)
+        return;
     keysPressed[e.getKeyCode()] = true;
-    if (e.getKeyCode() == LEFT && modelsIndexHoriz > 0 && models[modelsIndexHoriz-1][modelsIndexVert] != null)
+    if (e.getKeyCode() == LEFT && modelsIndexHoriz > 0 && models[modelsIndexHoriz-1][modelsIndexVert] != null){
         modelsIndexHoriz--;
-    if (e.getKeyCode() == RIGHT && modelsIndexHoriz < models.length - 1 && models[modelsIndexHoriz+1][modelsIndexVert] != null)
-        modelsIndexHoriz++;
-    if (e.getKeyCode() == UP && modelsIndexVert > 0 && models[modelsIndexHoriz][modelsIndexVert-1] != null)
-        modelsIndexVert--;
-    if (e.getKeyCode() == DOWN && modelsIndexVert < models[0].length - 1 && models[modelsIndexHoriz][modelsIndexVert+1] != null)
-        modelsIndexVert++;
-    if (e.getKeyCode() == 'R')
-    {
-        cameraRotX = 0;
-        cameraRotY = 0; 
     }
+    if (e.getKeyCode() == RIGHT && modelsIndexHoriz < models.length - 1 && models[modelsIndexHoriz+1][modelsIndexVert] != null){
+
+        modelsIndexHoriz++;
+    }
+    if (e.getKeyCode() == UP && modelsIndexVert > 0 && models[modelsIndexHoriz][modelsIndexVert-1] != null){
+         targetCameraRotX = 0;
+        targetCameraRotY = 0; 
+        modelsIndexVert--;
+    }
+    if (e.getKeyCode() == DOWN && modelsIndexVert < models[0].length - 2 && models[modelsIndexHoriz][modelsIndexVert+1] != null){
+         targetCameraRotX = 0;
+        targetCameraRotY = 0; 
+        modelsIndexVert++;
+    }
+    if (e.getKeyCode() == 'C')
+    {
+        targetCameraRotX = 0;
+        targetCameraRotY = 0; 
+    }
+    if(e.getKeyCode() == 'R')
+        setup();
 
     AtomModel targetModel = models[modelsIndexHoriz][modelsIndexVert];
-    if(targetModel != null)
+    if(targetModel != null){
+        targetScale = targetModel.getScale();
         targetPos = targetModel.getPosition();
+    }
+    
 }
 
 public void keyReleased(KeyEvent e)
@@ -117,9 +186,9 @@ public void keyReleased(KeyEvent e)
 
 public void mouseWheel(MouseEvent event)
 {
-    scaleFactor += event.getCount()/60f;
-    if(scaleFactor <= 1.8)
-        scaleFactor = 1.8;
-    if(scaleFactor >= 9)
-        scaleFactor = 9;
+    targetScale += event.getCount()/60f;
+    if(targetScale <= 1.8)
+       targetScale = 1.8;
+    if(targetScale >= 9)
+       targetScale = 9;
 }

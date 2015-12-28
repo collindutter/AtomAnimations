@@ -13,6 +13,7 @@ private class ThomsonElectron extends Particle
     {
         //move the electrons
         getPosition().add(getVelocity());
+        
 
         //check and handle collisions
         if (getPosition().mag() + getRadius() >= container.getRadius()-1)

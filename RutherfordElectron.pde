@@ -17,6 +17,8 @@ public class RutherfordElectron extends Particle
     @Override
     public void drawParticle()
     {
+        
+        
         //math for the basic particle rotation
         orbitAngle += angularVel;
         float x = orbitRadius*cos(orbitAngle);
